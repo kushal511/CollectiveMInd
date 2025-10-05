@@ -1,6 +1,6 @@
-# 🏆 HackWithBay 2025 - Due Diligence Copilot
+# 🏆 FinSight Copilot - Due Diligence AI Assistant
 
-**Track 1: Covenant Monitoring with Live Updates**
+**Real-time Covenant Monitoring with AI-Powered Document Extraction**
 
 An intelligent financial agent that monitors loan covenants in real-time, extracting data from complex financial documents and alerting on breaches instantly.
 
@@ -99,7 +99,8 @@ FinSight_Copilot/
 
 ### 1. Clone Repository
 ```bash
-cd /Users/mac_kushal/Desktop/FinSight_Copilot
+git clone https://github.com/kushal511/FinSight_Copilot.git
+cd FinSight_Copilot
 ```
 
 ### 2. Create Virtual Environment
@@ -274,97 +275,6 @@ Access API docs: http://localhost:8000/docs
 
 ---
 
-## 🎯 Hackathon Judging Criteria
-
-### 1. Impact (30%) - ⭐⭐⭐⭐⭐
-**Who benefits?**
-- **Finance Teams**: Instant breach detection saves hours of manual review
-- **Investors**: Real-time covenant monitoring reduces risk
-- **Compliance Officers**: Automated alerts ensure regulatory compliance
-
-**Metrics that move:**
-- ⏱️ **95% time savings** on covenant monitoring
-- 🎯 **100% accuracy** with LandingAI DPT-2 extraction
-- ⚡ **<1 second** breach detection with Pathway
-
-### 2. Technical Soundness (25%) - ⭐⭐⭐⭐⭐
-**Live conditions:**
-- ✅ Handles new files during demo
-- ✅ Graceful fallbacks for API failures
-- ✅ Automatic PDF truncation for size limits
-- ✅ Error handling with detailed logging
-
-**Design choices:**
-- Event-driven architecture for scalability
-- Modular components for maintainability
-- Multiple output formats for flexibility
-
-### 3. Originality (20%) - ⭐⭐⭐⭐
-**Novel features:**
-- 🆕 **Living memo** that auto-updates on every check
-- 🆕 **Conversational interface** for covenant Q&A
-- 🆕 **Multi-format extraction** (PDF, Image, JSON, CSV)
-- 🆕 **Evidence-based alerts** with source citations
-
-### 4. Presentation (15%) - ⭐⭐⭐⭐⭐
-**Clear narrative:**
-1. Problem: Manual covenant monitoring is slow and error-prone
-2. Solution: AI-powered copilot with real-time monitoring
-3. Demo: Live file update triggers instant breach alert
-4. Impact: Finance teams save 95% of monitoring time
-
-### 5. Effective Use of Tech (10%) - ⭐⭐⭐⭐⭐
-**LandingAI:**
-- ✅ DPT-2 for accurate table extraction from covenant PDFs
-- ✅ Vision parsing for scanned documents and images
-- ✅ Grounded fields with source evidence
-
-**Pathway:**
-- ✅ Live file monitoring with instant updates
-- ✅ Event-driven processing pipeline
-- ✅ Ready for hybrid vector + BM25 indexing
-
----
-
-## 🎤 Demo Script (5 Minutes)
-
-### Slide 1: Problem (30 sec)
-"Finance teams waste hours manually checking loan covenants across hundreds of documents. A single missed breach can cost millions."
-
-### Slide 2: Solution (30 sec)
-"We built an AI copilot that monitors covenants 24/7, using LandingAI to extract terms and Pathway to watch files in real-time."
-
-### Slide 3: Live Demo (3 min)
-
-**Part 1: Extraction (1 min)**
-```bash
-python hackathon_copilot.py
-```
-Show:
-- LandingAI extracting covenant terms from image
-- Financial data from SEC JSON
-- Breach detection with red flags
-
-**Part 2: Live Monitoring (1 min)**
-```bash
-python pathway_monitor.py 30
-```
-Show:
-- Pathway watching data room
-- Add new file → instant processing
-- Email alert generated
-
-**Part 3: Outputs (1 min)**
-Show:
-- Living memo (HTML)
-- Email alert (HTML)
-- Chatbot Q&A
-
-### Slide 4: Impact (1 min)
-"This saves finance teams 95% of monitoring time, detects breaches in under 1 second, and provides audit-ready documentation automatically."
-
----
-
 ## 📈 Results & Outputs
 
 ### Generated Artifacts
@@ -393,52 +303,6 @@ Show:
 
 ---
 
-## 🔄 Replication Steps
-
-### Quick Start (5 minutes)
-```bash
-# 1. Setup
-python3 -m venv .venv && source .venv/bin/activate
-pip install pandas beautifulsoup4 lxml requests PyPDF2 pillow \
-            watchdog python-dotenv landingai_ade
-
-# 2. Configure
-echo "LANDING_AI_API_KEY=your_key" > .env
-echo "LOCAL_DATA_PATH=./covenant-copilot/data" >> .env
-
-# 3. Run
-python hackathon_copilot.py
-```
-
-### Full Setup (10 minutes)
-See **Setup & Installation** section above
-
----
-
-## 🏆 Winning Features
-
-### 1. **Real-time Breach Detection**
-- Pathway monitors files 24/7
-- Instant alerts on covenant violations
-- No manual checking required
-
-### 2. **Accurate Extraction**
-- LandingAI DPT-2 handles complex tables
-- Works with scanned PDFs and images
-- Grounded evidence for every field
-
-### 3. **Intelligent Automation**
-- Living memos auto-update
-- Email alerts with HTML formatting
-- Conversational Q&A interface
-
-### 4. **Production-Ready**
-- Error handling and fallbacks
-- Modular architecture
-- Comprehensive logging
-
----
-
 ## 📚 References
 
 ### LandingAI Resources
@@ -454,26 +318,13 @@ See **Setup & Installation** section above
 
 ---
 
-## 👥 Team & Contact
+## 🎯 Future Enhancements
 
-**Project:** Due Diligence Copilot  
-**Track:** Track 1 - Due Diligence  
-**Hackathon:** HackWithBay 2025  
-
-**Tech Stack:**
-- LandingAI ADE (DPT-2) ✅
-- Pathway Framework ✅
-- Python 3.13 ✅
-
----
-
-## 🎯 Next Steps (Post-Hackathon)
-
-1. **LLM Integration**: Replace rule-based chatbot with GPT-4
-2. **Vector Search**: Add Pathway hybrid indexing for document search
-3. **Multi-Company**: Support multiple portfolios simultaneously
-4. **Mobile App**: iOS/Android apps for on-the-go monitoring
-5. **Integrations**: Slack, Teams, Bloomberg Terminal
+- **LLM Integration**: Advanced conversational AI with GPT-4
+- **Vector Search**: Hybrid indexing for intelligent document search
+- **Multi-Company Support**: Monitor multiple portfolios simultaneously
+- **Mobile Applications**: iOS/Android apps for on-the-go monitoring
+- **Enterprise Integrations**: Slack, Teams, Bloomberg Terminal connectivity
 
 ---
 
