@@ -1,0 +1,3 @@
+python-dotenv
+landingai-ade
+PyPDF2

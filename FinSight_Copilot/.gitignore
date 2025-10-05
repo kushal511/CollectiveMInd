@@ -39,3 +39,17 @@ Thumbs.db
 *.log
 *.tmp
 .cache/
+
+# Build artifacts
+.next/
+*.db
+*.sqlite
+
+# Generated files
+covenant-copilot/apps/api/emails/
+covenant-copilot/data/breach_alert_*.html
+covenant-copilot/data/chatbot_conversation.json
+covenant-copilot/data/covenant_results.json
+covenant-copilot/data/red_flags.json
+covenant-copilot/data/memos/
+covenant-copilot/data/pathway_results/
