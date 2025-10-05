@@ -1,0 +1,1327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Covenant Monitoring Copilot - AI-Powered Financial Intelligence</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+        
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        @keyframes blob {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(20px, -50px) scale(1.1); }
+            50% { transform: translate(-20px, 20px) scale(0.9); }
+            75% { transform: translate(20px, 30px) scale(1.05); }
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        @keyframes pulse-slow {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animate-blob {
+            animation: blob 7s infinite;
+        }
+        
+        .animation-delay-2000 {
+            animation-delay: 2s;
+        }
+        
+        .animation-delay-4000 {
+            animation-delay: 4s;
+        }
+        
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        .animate-pulse-slow {
+            animation: pulse-slow 3s ease-in-out infinite;
+        }
+        
+        .animate-slide-in {
+            animation: slideInUp 0.8s ease-out forwards;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .btn-gradient {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-gradient:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+        
+        .progress-bar {
+            transition: width 1.5s ease-out;
+        }
+        
+        .upload-zone {
+            border: 3px dashed #cbd5e0;
+            transition: all 0.3s ease;
+        }
+        
+        .upload-zone:hover {
+            border-color: #667eea;
+            background: rgba(102, 126, 234, 0.05);
+        }
+        
+        .upload-zone.dragover {
+            border-color: #667eea;
+            background: rgba(102, 126, 234, 0.1);
+            transform: scale(1.02);
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 min-h-screen">
+    
+    <!-- Animated Background Blobs -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+        <div class="absolute -top-40 -right-40 w-96 h-96 bg-blue-400 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob"></div>
+        <div class="absolute -bottom-40 -left-40 w-96 h-96 bg-purple-400 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-2000"></div>
+        <div class="absolute top-40 left-1/2 w-96 h-96 bg-pink-400 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-4000"></div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="relative z-10 container mx-auto px-4 py-8 max-w-7xl">
+        
+        <!-- Header -->
+        <div class="mb-12">
+            <div class="flex items-center justify-between flex-wrap gap-4">
+                <div class="flex items-center space-x-4">
+                    <div class="p-3 bg-gradient-to-br from-blue-600 to-indigo-600 rounded-2xl shadow-lg animate-float">
+                        <i class="fas fa-shield-alt text-white text-3xl"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-5xl font-black gradient-text mb-2">
+                            Covenant Monitoring Copilot
+                        </h1>
+                        <p class="text-gray-600 flex items-center space-x-2 text-lg">
+                            <i class="fas fa-bolt text-yellow-500"></i>
+                            <span>AI-powered real-time covenant monitoring with LandingAI DPT-2 & Pathway</span>
+                        </p>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-6">
+                    <div class="text-right">
+                        <div class="text-sm text-gray-500 font-medium">Documents Processed</div>
+                        <div class="text-3xl font-bold text-blue-600" id="docCounter">0</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Upload Section -->
+        <div class="mb-8 animate-slide-in">
+            <div class="glass-effect rounded-2xl shadow-2xl overflow-hidden">
+                <div class="bg-gradient-to-r from-green-600 via-emerald-600 to-teal-600 p-6 text-white">
+                    <div class="flex items-center space-x-3">
+                        <i class="fas fa-cloud-upload-alt text-2xl"></i>
+                        <div>
+                            <h2 class="text-2xl font-bold">Document Upload</h2>
+                            <p class="text-green-100">Upload financial documents for AI-powered covenant analysis</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="p-8">
+                    <!-- Drag & Drop Zone -->
+                    <div id="dropZone" class="upload-zone rounded-xl p-12 text-center cursor-pointer">
+                        <div class="space-y-4">
+                            <div class="flex justify-center">
+                                <div class="p-6 bg-gradient-to-br from-blue-100 to-indigo-100 rounded-full">
+                                    <i class="fas fa-file-upload text-5xl text-blue-600"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <h3 class="text-2xl font-bold text-gray-900 mb-2">Drop files here or click to browse</h3>
+                                <p class="text-gray-600 mb-4">Supported formats: PDF, JSON, CSV, Images (JPG, PNG), HTML/iXBRL</p>
+                                <p class="text-sm text-gray-500">Maximum file size: 50MB per file</p>
+                            </div>
+                            <input type="file" id="fileInput" multiple accept=".pdf,.json,.csv,.jpg,.jpeg,.png,.html,.xbrl" class="hidden">
+                        </div>
+                    </div>
+                    
+                    <!-- Uploaded Files List -->
+                    <div id="filesList" class="mt-6 space-y-3 hidden"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Control Center Card -->
+        <div class="mb-8 animate-slide-in">
+            <div class="glass-effect rounded-2xl shadow-2xl overflow-hidden">
+                <div class="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 p-6 text-white">
+                    <div class="flex items-center space-x-3">
+                        <i class="fas fa-chart-line text-2xl"></i>
+                        <div>
+                            <h2 class="text-2xl font-bold">Control Center</h2>
+                            <p class="text-blue-100">Monitor Tesla Inc. covenant compliance in real-time</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="p-8 space-y-6">
+                    <!-- Company Info Cards -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="p-6 bg-gradient-to-br from-blue-50 to-indigo-100 rounded-xl border-2 border-blue-200 card-hover">
+                            <div class="flex items-center space-x-3 mb-3">
+                                <i class="fas fa-building text-blue-600 text-xl"></i>
+                                <span class="text-sm font-semibold text-gray-600">Company</span>
+                            </div>
+                            <p class="text-2xl font-bold text-gray-900">Tesla Inc.</p>
+                            <p class="text-sm text-gray-600 mt-1">NASDAQ: TSLA</p>
+                        </div>
+                        <div class="p-6 bg-gradient-to-br from-purple-50 to-pink-100 rounded-xl border-2 border-purple-200 card-hover">
+                            <div class="flex items-center space-x-3 mb-3">
+                                <i class="fas fa-calendar-alt text-purple-600 text-xl"></i>
+                                <span class="text-sm font-semibold text-gray-600">Period</span>
+                            </div>
+                            <p class="text-2xl font-bold text-gray-900">Q2 2025</p>
+                            <p class="text-sm text-gray-600 mt-1">Latest Filing</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Action Buttons -->
+                    <div class="flex flex-wrap gap-4">
+                        <button onclick="runCovenantCheck()" id="runBtn" 
+                                class="flex-1 min-w-[220px] h-14 btn-gradient text-white font-bold rounded-xl shadow-lg flex items-center justify-center space-x-3">
+                            <i class="fas fa-play text-xl"></i>
+                            <span class="text-lg">Run Covenant Check</span>
+                        </button>
+                        <button onclick="generateMemo()" id="memoBtn" 
+                                class="hidden flex-1 min-w-[200px] h-14 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-bold rounded-xl shadow-lg flex items-center justify-center space-x-3 transition-all duration-300 hover:scale-105">
+                            <i class="fas fa-file-download text-xl"></i>
+                            <span class="text-lg">Generate Memo</span>
+                        </button>
+                        <button onclick="showEmailAlert()" id="emailBtn" 
+                                class="hidden flex-1 min-w-[200px] h-14 bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white font-bold rounded-xl shadow-lg flex items-center justify-center space-x-3 transition-all duration-300 hover:scale-105">
+                            <i class="fas fa-envelope text-xl"></i>
+                            <span class="text-lg">View Email Alert</span>
+                        </button>
+                        <button onclick="toggleWatcher()" id="watcherBtn" 
+                                class="flex-1 min-w-[200px] h-14 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-bold rounded-xl shadow-lg flex items-center justify-center space-x-3 transition-all duration-300 hover:scale-105">
+                            <i class="fas fa-eye text-xl"></i>
+                            <span class="text-lg">Start Live Monitor</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Container (same as before) -->
+        <div id="resultsContainer" class="hidden space-y-8">
+            <!-- Status Card -->
+            <div id="statusCard" class="glass-effect rounded-2xl shadow-2xl overflow-hidden animate-slide-in">
+                <div id="statusBanner" class="p-10 text-white relative overflow-hidden">
+                    <div class="absolute inset-0 bg-black opacity-10"></div>
+                    <div class="relative z-10">
+                        <div class="flex items-center justify-between mb-6">
+                            <div class="flex items-center space-x-6">
+                                <div class="p-4 bg-white bg-opacity-20 rounded-full backdrop-blur-sm">
+                                    <i id="statusIcon" class="fas fa-check-circle text-5xl"></i>
+                                </div>
+                                <div>
+                                    <h2 class="text-4xl font-black mb-2">Covenant Status</h2>
+                                    <p class="text-xl opacity-90" id="statusSubtitle">Tesla Inc. - Q2 2025</p>
+                                </div>
+                            </div>
+                            <div>
+                                <div id="statusBadge" class="px-8 py-4 rounded-2xl text-3xl font-black backdrop-blur-sm">
+                                    PASS
+                                </div>
+                            </div>
+                        </div>
+                        <div id="alertBanner" class="hidden p-5 bg-white bg-opacity-10 rounded-xl backdrop-blur-sm border border-white border-opacity-20">
+                            <div class="flex items-center space-x-3">
+                                <i class="fas fa-exclamation-triangle text-2xl animate-pulse"></i>
+                                <span class="font-bold text-lg">Alert: Immediate action required - Covenant breach detected</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Covenant Cards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Leverage Card -->
+                <div id="leverageCard" class="glass-effect rounded-2xl shadow-xl card-hover overflow-hidden">
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="flex items-center space-x-3">
+                                <i class="fas fa-chart-line text-2xl text-blue-600"></i>
+                                <h3 class="text-xl font-bold text-gray-900">Leverage Ratio</h3>
+                            </div>
+                            <i id="leverageIcon" class="fas fa-check-circle text-3xl text-green-500"></i>
+                        </div>
+                        <div class="text-6xl font-black gradient-text mb-4" id="leverageValue">0.0x</div>
+                        <div class="space-y-2 mb-4">
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm text-gray-600">Limit:</span>
+                                <span class="text-lg font-bold" id="leverageLimit">3.5x</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm text-gray-600">Margin:</span>
+                                <span class="text-lg font-bold" id="leverageMargin">+0.0x</span>
+                            </div>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
+                            <div id="leverageProgress" class="h-3 rounded-full progress-bar" style="width: 0%"></div>
+                        </div>
+                        <div class="mt-4">
+                            <span id="leverageBadge" class="px-4 py-2 rounded-full text-sm font-bold">PASS</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Coverage Card -->
+                <div id="coverageCard" class="glass-effect rounded-2xl shadow-xl card-hover overflow-hidden">
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="flex items-center space-x-3">
+                                <i class="fas fa-heartbeat text-2xl text-indigo-600"></i>
+                                <h3 class="text-xl font-bold text-gray-900">Interest Coverage</h3>
+                            </div>
+                            <i id="coverageIcon" class="fas fa-check-circle text-3xl text-green-500"></i>
+                        </div>
+                        <div class="text-6xl font-black gradient-text mb-4" id="coverageValue">0.0x</div>
+                        <div class="space-y-2 mb-4">
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm text-gray-600">Minimum:</span>
+                                <span class="text-lg font-bold" id="coverageLimit">2.0x</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm text-gray-600">Margin:</span>
+                                <span class="text-lg font-bold" id="coverageMargin">+0.0x</span>
+                            </div>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
+                            <div id="coverageProgress" class="h-3 rounded-full progress-bar bg-gradient-to-r from-blue-500 to-indigo-500" style="width: 0%"></div>
+                        </div>
+                        <div class="mt-4">
+                            <span id="coverageBadge" class="px-4 py-2 rounded-full text-sm font-bold bg-green-100 text-green-800">PASS</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Liquidity Card -->
+                <div id="liquidityCard" class="glass-effect rounded-2xl shadow-xl card-hover overflow-hidden">
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="flex items-center space-x-3">
+                                <i class="fas fa-dollar-sign text-2xl text-purple-600"></i>
+                                <h3 class="text-xl font-bold text-gray-900">Liquidity</h3>
+                            </div>
+                            <i id="liquidityIcon" class="fas fa-check-circle text-3xl text-green-500"></i>
+                        </div>
+                        <div class="text-5xl font-black gradient-text mb-4" id="liquidityValue">$0M</div>
+                        <div class="space-y-2 mb-4">
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm text-gray-600">Minimum:</span>
+                                <span class="text-lg font-bold" id="liquidityLimit">$100M</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm text-gray-600">Margin:</span>
+                                <span class="text-lg font-bold text-green-600" id="liquidityMargin">+$0M</span>
+                            </div>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
+                            <div id="liquidityProgress" class="h-3 rounded-full progress-bar bg-gradient-to-r from-purple-500 to-pink-500" style="width: 100%"></div>
+                        </div>
+                        <div class="mt-4">
+                            <span id="liquidityBadge" class="px-4 py-2 rounded-full text-sm font-bold bg-green-100 text-green-800">PASS</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Red Flags Card -->
+            <div id="redFlagsCard" class="hidden glass-effect rounded-2xl shadow-2xl overflow-hidden animate-pulse-slow">
+                <div class="bg-gradient-to-r from-red-600 via-pink-600 to-red-600 p-6 text-white">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-4">
+                            <div class="p-3 bg-white bg-opacity-20 rounded-full animate-pulse">
+                                <i class="fas fa-exclamation-triangle text-3xl"></i>
+                            </div>
+                            <span class="text-3xl font-black">🚨 Critical Alerts Detected</span>
+                        </div>
+                        <span id="flagCount" class="px-4 py-2 bg-white text-red-600 rounded-full text-xl font-black">0</span>
+                    </div>
+                </div>
+                <div class="p-8">
+                    <div id="flagsList" class="space-y-4"></div>
+                    <div class="mt-8 p-6 bg-yellow-50 border-2 border-yellow-200 rounded-xl">
+                        <div class="flex items-start space-x-4">
+                            <i class="fas fa-lightbulb text-yellow-600 text-2xl mt-1"></i>
+                            <div>
+                                <h4 class="font-bold text-yellow-900 text-lg mb-3">Recommended Actions</h4>
+                                <ul class="text-yellow-800 space-y-2">
+                                    <li class="flex items-center space-x-2">
+                                        <i class="fas fa-check-circle"></i>
+                                        <span>Contact legal and finance teams immediately</span>
+                                    </li>
+                                    <li class="flex items-center space-x-2">
+                                        <i class="fas fa-check-circle"></i>
+                                        <span>Prepare breach notification per credit agreement</span>
+                                    </li>
+                                    <li class="flex items-center space-x-2">
+                                        <i class="fas fa-check-circle"></i>
+                                        <span>Develop remediation plan to restore compliance</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Email Alert Modal -->
+        <div id="emailModal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+            <div class="glass-effect rounded-2xl shadow-2xl max-w-3xl w-full overflow-hidden animate-slide-in">
+                <div class="bg-gradient-to-r from-orange-600 to-red-600 p-6 text-white flex items-center justify-between">
+                    <div class="flex items-center space-x-3">
+                        <i class="fas fa-envelope text-3xl animate-pulse"></i>
+                        <div>
+                            <h2 class="text-2xl font-bold">📧 Email Alert Sent</h2>
+                            <p class="text-orange-100">Breach notification delivered to stakeholders</p>
+                        </div>
+                    </div>
+                    <button onclick="closeEmail()" class="text-white hover:text-gray-200">
+                        <i class="fas fa-times text-2xl"></i>
+                    </button>
+                </div>
+                <div class="p-8 bg-white">
+                    <div class="mb-6 p-4 bg-green-50 border-l-4 border-green-500 rounded">
+                        <div class="flex items-center space-x-2">
+                            <i class="fas fa-check-circle text-green-600 text-xl"></i>
+                            <span class="font-bold text-green-800">Email Successfully Delivered</span>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-4 mb-6">
+                        <div class="flex items-start space-x-3">
+                            <i class="fas fa-paper-plane text-blue-600 mt-1"></i>
+                            <div class="flex-1">
+                                <p class="text-sm text-gray-600">From:</p>
+                                <p class="font-semibold">Covenant Copilot &lt;alerts@finsight.ai&gt;</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <i class="fas fa-users text-blue-600 mt-1"></i>
+                            <div class="flex-1">
+                                <p class="text-sm text-gray-600">To:</p>
+                                <div class="space-y-1">
+                                    <p class="font-semibold">cfo@tesla.com</p>
+                                    <p class="font-semibold">legal@tesla.com</p>
+                                    <p class="font-semibold">analyst@tesla.com</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <i class="fas fa-tag text-blue-600 mt-1"></i>
+                            <div class="flex-1">
+                                <p class="text-sm text-gray-600">Subject:</p>
+                                <p class="font-semibold">🚨 COVENANT BREACH ALERT - Tesla Inc. (Q2 2025)</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="p-6 bg-gray-50 rounded-lg border border-gray-200">
+                        <h3 class="font-bold text-lg mb-4">Email Preview:</h3>
+                        <div class="space-y-3 text-sm">
+                            <p class="font-bold text-red-600">⚠️ IMMEDIATE ACTION REQUIRED</p>
+                            <p>A covenant breach has been detected in the latest financial analysis:</p>
+                            <div class="p-4 bg-white rounded border-l-4 border-red-500">
+                                <p class="font-bold">Breach Details:</p>
+                                <ul class="mt-2 space-y-1">
+                                    <li>• <strong>Covenant:</strong> Leverage Ratio</li>
+                                    <li>• <strong>Actual:</strong> 3.78x</li>
+                                    <li>• <strong>Limit:</strong> 3.5x</li>
+                                    <li>• <strong>Variance:</strong> -0.28x (8% over limit)</li>
+                                </ul>
+                            </div>
+                            <p><strong>Recommended Actions:</strong></p>
+                            <ol class="list-decimal list-inside space-y-1 ml-2">
+                                <li>Contact legal and finance teams immediately</li>
+                                <li>Prepare lender notification per credit agreement</li>
+                                <li>Develop remediation plan</li>
+                            </ol>
+                            <p class="text-blue-600 underline cursor-pointer" onclick="closeEmail(); showMemo();">→ View Full Compliance Report</p>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-6 p-4 bg-blue-50 rounded-lg">
+                        <div class="flex items-center space-x-2 text-sm text-blue-800">
+                            <i class="fas fa-clock"></i>
+                            <span>Sent: ${new Date().toLocaleString()}</span>
+                            <span class="mx-2">•</span>
+                            <i class="fas fa-check-double text-green-600"></i>
+                            <span>Delivered to 3 recipients</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-6 bg-gray-50 border-t">
+                    <div class="mb-4">
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Send to additional recipients:</label>
+                        <div class="flex space-x-3">
+                            <input 
+                                type="email" 
+                                id="additionalEmail" 
+                                placeholder="Enter email address (e.g., your@email.com)"
+                                class="flex-1 px-4 py-2 border-2 border-gray-300 rounded-lg focus:border-blue-600 focus:outline-none"
+                            >
+                            <button onclick="sendActualEmail()" class="px-6 py-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold rounded-lg hover:scale-105 transition-all">
+                                <i class="fas fa-paper-plane mr-2"></i>Send Email
+                            </button>
+                        </div>
+                        <p class="text-xs text-gray-500 mt-2">Enter your email to receive the actual breach alert</p>
+                    </div>
+                    <div class="flex justify-end space-x-3">
+                        <button onclick="closeEmail()" class="px-6 py-3 bg-gray-600 text-white font-bold rounded-lg hover:bg-gray-700 transition-all">
+                            Close
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Memo Viewer Modal -->
+        <div id="memoModal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+            <div class="glass-effect rounded-2xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden">
+                <div class="bg-gradient-to-r from-blue-600 to-indigo-600 p-6 text-white flex items-center justify-between">
+                    <div class="flex items-center space-x-3">
+                        <i class="fas fa-file-alt text-2xl"></i>
+                        <h2 class="text-2xl font-bold">Covenant Compliance Memo</h2>
+                    </div>
+                    <button onclick="closeMemo()" class="text-white hover:text-gray-200">
+                        <i class="fas fa-times text-2xl"></i>
+                    </button>
+                </div>
+                <div id="memoContent" class="p-8 overflow-y-auto max-h-[70vh] bg-white">
+                    <!-- Memo content will be loaded here -->
+                </div>
+                <div class="p-6 bg-gray-50 flex justify-end space-x-4">
+                    <button onclick="downloadMemo()" class="px-6 py-3 bg-gradient-to-r from-green-600 to-emerald-600 text-white font-bold rounded-lg hover:scale-105 transition-all">
+                        <i class="fas fa-download mr-2"></i>Download PDF
+                    </button>
+                    <button onclick="closeMemo()" class="px-6 py-3 bg-gray-600 text-white font-bold rounded-lg hover:bg-gray-700 transition-all">
+                        Close
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chatbot Interface -->
+        <div class="mt-8 animate-slide-in">
+            <div class="glass-effect rounded-2xl shadow-2xl overflow-hidden">
+                <div class="bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 p-6 text-white">
+                    <div class="flex items-center space-x-3">
+                        <i class="fas fa-robot text-2xl"></i>
+                        <div>
+                            <h2 class="text-2xl font-bold">AI Covenant Assistant</h2>
+                            <p class="text-purple-100">Ask questions about covenant compliance</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Chat Messages -->
+                <div id="chatMessages" class="p-6 bg-white h-96 overflow-y-auto space-y-4">
+                    <div class="flex items-start space-x-3">
+                        <div class="p-2 bg-purple-100 rounded-full">
+                            <i class="fas fa-robot text-purple-600"></i>
+                        </div>
+                        <div class="flex-1 p-4 bg-purple-50 rounded-lg">
+                            <p class="text-gray-800">👋 Hello! I'm your AI Covenant Assistant. I can help you understand the covenant analysis. Try asking:</p>
+                            <ul class="mt-2 space-y-1 text-sm text-gray-600">
+                                <li>• "What is the leverage ratio?"</li>
+                                <li>• "Are there any breaches?"</li>
+                                <li>• "What actions should we take?"</li>
+                                <li>• "Show me the financial metrics"</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Chat Input -->
+                <div class="p-6 bg-gray-50 border-t">
+                    <div class="flex space-x-4">
+                        <input 
+                            type="text" 
+                            id="chatInput" 
+                            placeholder="Ask a question about covenants..."
+                            class="flex-1 px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-purple-600 focus:outline-none"
+                            onkeypress="if(event.key==='Enter') sendMessage()"
+                        >
+                        <button 
+                            onclick="sendMessage()" 
+                            class="px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold rounded-lg hover:scale-105 transition-all">
+                            <i class="fas fa-paper-plane mr-2"></i>Send
+                        </button>
+                    </div>
+                    <div class="mt-3 flex items-center space-x-4">
+                        <button onclick="clearChat()" class="text-sm text-gray-600 hover:text-gray-800">
+                            <i class="fas fa-trash mr-1"></i>Clear History
+                        </button>
+                        <button onclick="exportChat()" class="text-sm text-gray-600 hover:text-gray-800">
+                            <i class="fas fa-download mr-1"></i>Export Chat
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        let uploadedFiles = [];
+        let docCounter = 0;
+
+        // File Upload Handling
+        const dropZone = document.getElementById('dropZone');
+        const fileInput = document.getElementById('fileInput');
+        const filesList = document.getElementById('filesList');
+
+        dropZone.addEventListener('click', () => fileInput.click());
+
+        dropZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dropZone.classList.add('dragover');
+        });
+
+        dropZone.addEventListener('dragleave', () => {
+            dropZone.classList.remove('dragover');
+        });
+
+        dropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropZone.classList.remove('dragover');
+            handleFiles(e.dataTransfer.files);
+        });
+
+        fileInput.addEventListener('change', (e) => {
+            handleFiles(e.target.files);
+        });
+
+        function handleFiles(files) {
+            filesList.classList.remove('hidden');
+            Array.from(files).forEach(file => {
+                uploadedFiles.push(file);
+                docCounter++;
+                document.getElementById('docCounter').textContent = docCounter;
+                addFileToList(file);
+            });
+        }
+
+        function addFileToList(file) {
+            const fileItem = document.createElement('div');
+            fileItem.className = 'flex items-center justify-between p-4 bg-white rounded-lg shadow-md card-hover';
+            
+            const icon = getFileIcon(file.name);
+            const size = (file.size / 1024).toFixed(2);
+            
+            fileItem.innerHTML = `
+                <div class="flex items-center space-x-4">
+                    <div class="p-3 bg-gradient-to-br from-blue-100 to-indigo-100 rounded-lg">
+                        <i class="${icon} text-2xl text-blue-600"></i>
+                    </div>
+                    <div>
+                        <p class="font-bold text-gray-900">${file.name}</p>
+                        <p class="text-sm text-gray-600">${size} KB</p>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-3">
+                    <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-xs font-bold">
+                        <i class="fas fa-check-circle"></i> Uploaded
+                    </span>
+                    <button onclick="removeFile('${file.name}')" class="text-red-600 hover:text-red-800">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+            `;
+            
+            filesList.appendChild(fileItem);
+        }
+
+        function getFileIcon(filename) {
+            const ext = filename.split('.').pop().toLowerCase();
+            const icons = {
+                'pdf': 'fas fa-file-pdf',
+                'json': 'fas fa-file-code',
+                'csv': 'fas fa-file-csv',
+                'jpg': 'fas fa-file-image',
+                'jpeg': 'fas fa-file-image',
+                'png': 'fas fa-file-image',
+                'html': 'fas fa-file-code',
+                'xbrl': 'fas fa-file-code'
+            };
+            return icons[ext] || 'fas fa-file';
+        }
+
+        function removeFile(filename) {
+            uploadedFiles = uploadedFiles.filter(f => f.name !== filename);
+            docCounter--;
+            document.getElementById('docCounter').textContent = docCounter;
+            // Refresh file list
+            filesList.innerHTML = '';
+            uploadedFiles.forEach(file => addFileToList(file));
+            if (uploadedFiles.length === 0) {
+                filesList.classList.add('hidden');
+            }
+        }
+
+        async function runCovenantCheck() {
+            const btn = document.getElementById('runBtn');
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin text-xl"></i><span class="text-lg">Analyzing...</span>';
+            
+            try {
+                const response = await fetch('http://localhost:8000/api/run-check', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        company_name: 'Tesla Inc.',
+                        period: 'Q2 2025',
+                        data_path: '../../data'
+                    })
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    displayResults(data);
+                    document.getElementById('memoBtn').classList.remove('hidden');
+                    document.getElementById('memoBtn').classList.add('flex');
+                    document.getElementById('emailBtn').classList.remove('hidden');
+                    document.getElementById('emailBtn').classList.add('flex');
+                    
+                    // Auto-show email notification after 2 seconds
+                    setTimeout(() => {
+                        showEmailNotification();
+                    }, 2000);
+                } else {
+                    alert('Error: ' + response.status);
+                }
+            } catch (error) {
+                alert('Network error: ' + error);
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = '<i class="fas fa-play text-xl"></i><span class="text-lg">Run Covenant Check</span>';
+            }
+        }
+
+        function displayResults(data) {
+            document.getElementById('resultsContainer').classList.remove('hidden');
+            
+            const statusBanner = document.getElementById('statusBanner');
+            const statusIcon = document.getElementById('statusIcon');
+            const statusBadge = document.getElementById('statusBadge');
+            const alertBanner = document.getElementById('alertBanner');
+            
+            if (data.overall_status === 'BREACH') {
+                statusBanner.className = 'p-10 text-white relative overflow-hidden bg-gradient-to-r from-red-600 via-pink-600 to-red-600';
+                statusIcon.className = 'fas fa-exclamation-triangle text-5xl';
+                statusBadge.className = 'px-8 py-4 rounded-2xl text-3xl font-black backdrop-blur-sm bg-red-900 bg-opacity-50';
+                statusBadge.textContent = 'BREACH';
+                alertBanner.classList.remove('hidden');
+            } else {
+                statusBanner.className = 'p-10 text-white relative overflow-hidden bg-gradient-to-r from-green-600 via-emerald-600 to-green-600';
+                statusIcon.className = 'fas fa-check-circle text-5xl';
+                statusBadge.className = 'px-8 py-4 rounded-2xl text-3xl font-black backdrop-blur-sm bg-green-900 bg-opacity-50';
+                statusBadge.textContent = 'PASS';
+            }
+            
+            updateCovenantCard('leverage', data.tests.leverage);
+            updateCovenantCard('coverage', data.tests.coverage);
+            updateCovenantCard('liquidity', data.tests.liquidity);
+            
+            if (data.red_flags && data.red_flags.length > 0) {
+                displayRedFlags(data.red_flags);
+            }
+        }
+
+        function updateCovenantCard(type, test) {
+            const value = document.getElementById(type + 'Value');
+            const limit = document.getElementById(type + 'Limit');
+            const margin = document.getElementById(type + 'Margin');
+            const progress = document.getElementById(type + 'Progress');
+            const badge = document.getElementById(type + 'Badge');
+            const icon = document.getElementById(type + 'Icon');
+            const card = document.getElementById(type + 'Card');
+            
+            if (type === 'liquidity') {
+                value.textContent = '$' + test.actual.toLocaleString() + 'M';
+                limit.textContent = '$' + test.limit + 'M';
+                margin.textContent = '+$' + test.margin.toLocaleString() + 'M';
+            } else {
+                value.textContent = test.actual + 'x';
+                limit.textContent = test.limit + 'x';
+                margin.textContent = (test.margin > 0 ? '+' : '') + test.margin + 'x';
+            }
+            
+            let percentage = type === 'liquidity' ? 100 : Math.min((test.actual / test.limit) * 100, 100);
+            setTimeout(() => {
+                progress.style.width = percentage + '%';
+            }, 100);
+            
+            if (test.status === 'BREACH') {
+                card.className = 'glass-effect rounded-2xl shadow-xl card-hover overflow-hidden border-l-4 border-red-500';
+                progress.className = 'h-3 rounded-full progress-bar bg-gradient-to-r from-red-500 to-pink-500';
+                badge.className = 'px-4 py-2 rounded-full text-sm font-bold bg-red-100 text-red-800';
+                badge.textContent = 'BREACH';
+                icon.className = 'fas fa-exclamation-circle text-3xl text-red-500';
+                margin.className = 'text-lg font-bold text-red-600';
+            } else {
+                card.className = 'glass-effect rounded-2xl shadow-xl card-hover overflow-hidden border-l-4 border-green-500';
+                badge.className = 'px-4 py-2 rounded-full text-sm font-bold bg-green-100 text-green-800';
+                badge.textContent = 'PASS';
+                icon.className = 'fas fa-check-circle text-3xl text-green-500';
+                margin.className = 'text-lg font-bold text-green-600';
+            }
+        }
+
+        function displayRedFlags(flags) {
+            const card = document.getElementById('redFlagsCard');
+            const count = document.getElementById('flagCount');
+            const list = document.getElementById('flagsList');
+            
+            card.classList.remove('hidden');
+            count.textContent = flags.length;
+            
+            list.innerHTML = flags.map(flag => `
+                <div class="p-6 bg-white border-l-4 border-red-500 rounded-xl shadow-lg card-hover">
+                    <div class="flex items-start space-x-4">
+                        <div class="p-3 bg-red-100 rounded-full">
+                            <i class="fas fa-exclamation-triangle text-red-600 text-xl"></i>
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex items-center justify-between mb-2">
+                                <h4 class="font-black text-xl text-red-800">${flag.rule.toUpperCase()} BREACH</h4>
+                                <span class="px-3 py-1 bg-red-600 text-white rounded-full text-xs font-bold">HIGH PRIORITY</span>
+                            </div>
+                            <p class="text-red-700 font-semibold mb-3">${flag.message}</p>
+                            <div class="flex items-center space-x-6 text-sm text-gray-600">
+                                <span>Actual: <strong class="text-red-600">${flag.actual}</strong></span>
+                                <span>•</span>
+                                <span>Limit: <strong>${flag.limit}</strong></span>
+                                <span>•</span>
+                                <span>Variance: <strong class="text-red-600">${Math.abs(flag.margin)}</strong></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function toggleWatcher() {
+            alert('Live monitoring activated! Files will be processed automatically.');
+        }
+
+        function generateMemo() {
+            showMemo();
+        }
+
+        // Memo Viewer Functions
+        let currentResults = null;
+
+        function showMemo() {
+            const memoContent = `
+                <div class="prose max-w-none">
+                    <h1 class="text-3xl font-bold text-gray-900 mb-4">Covenant Monitoring Memo</h1>
+                    <h2 class="text-2xl font-semibold text-gray-800 mb-4">Tesla, Inc. - Q2 2025</h2>
+                    
+                    <div class="mb-6 p-4 bg-red-50 border-l-4 border-red-500 rounded">
+                        <p class="font-bold text-red-800">Overall Status: 🔴 BREACH</p>
+                    </div>
+                    
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Executive Summary</h3>
+                    <p class="text-gray-700 mb-4">This memo provides an automated analysis of Tesla, Inc.'s compliance with loan covenants for Q2 2025.</p>
+                    
+                    <h3 class="text-xl font-bold text-red-800 mb-3">🚨 RED FLAGS DETECTED</h3>
+                    <ul class="list-disc list-inside mb-6 text-red-700">
+                        <li><strong>LEVERAGE:</strong> Leverage ratio of 3.78x exceeds the 3.5x limit</li>
+                    </ul>
+                    
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Covenant Test Results</h3>
+                    <table class="min-w-full border-collapse border border-gray-300 mb-6">
+                        <thead>
+                            <tr class="bg-gray-100">
+                                <th class="border border-gray-300 px-4 py-2 text-left">Test</th>
+                                <th class="border border-gray-300 px-4 py-2 text-left">Actual</th>
+                                <th class="border border-gray-300 px-4 py-2 text-left">Limit</th>
+                                <th class="border border-gray-300 px-4 py-2 text-left">Status</th>
+                                <th class="border border-gray-300 px-4 py-2 text-left">Margin</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="border border-gray-300 px-4 py-2">Leverage</td>
+                                <td class="border border-gray-300 px-4 py-2">3.78x</td>
+                                <td class="border border-gray-300 px-4 py-2">3.5x</td>
+                                <td class="border border-gray-300 px-4 py-2 text-red-600 font-bold">❌ BREACH</td>
+                                <td class="border border-gray-300 px-4 py-2 text-red-600">-0.28x</td>
+                            </tr>
+                            <tr class="bg-gray-50">
+                                <td class="border border-gray-300 px-4 py-2">Coverage</td>
+                                <td class="border border-gray-300 px-4 py-2">8.16x</td>
+                                <td class="border border-gray-300 px-4 py-2">2.0x</td>
+                                <td class="border border-gray-300 px-4 py-2 text-green-600 font-bold">✅ PASS</td>
+                                <td class="border border-gray-300 px-4 py-2 text-green-600">+6.16x</td>
+                            </tr>
+                            <tr>
+                                <td class="border border-gray-300 px-4 py-2">Liquidity</td>
+                                <td class="border border-gray-300 px-4 py-2">$15,587M</td>
+                                <td class="border border-gray-300 px-4 py-2">$100M</td>
+                                <td class="border border-gray-300 px-4 py-2 text-green-600 font-bold">✅ PASS</td>
+                                <td class="border border-gray-300 px-4 py-2 text-green-600">+$15,487M</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Financial Metrics</h3>
+                    <ul class="list-disc list-inside mb-6 text-gray-700">
+                        <li><strong>Total Debt:</strong> $4,994M</li>
+                        <li><strong>EBITDA:</strong> $1,322M</li>
+                        <li><strong>Interest Expense:</strong> $162M</li>
+                        <li><strong>Cash & Equivalents:</strong> $15,587M</li>
+                    </ul>
+                    
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Recommendations</h3>
+                    <ol class="list-decimal list-inside mb-6 text-gray-700 space-y-2">
+                        <li><strong>Immediate Action Required:</strong> Contact legal and finance teams</li>
+                        <li><strong>Lender Notification:</strong> Prepare breach notification per credit agreement</li>
+                        <li><strong>Remediation Plan:</strong> Develop action plan to restore compliance</li>
+                        <li><strong>Waiver Request:</strong> Consider requesting covenant waiver if appropriate</li>
+                    </ol>
+                    
+                    <div class="mt-8 p-4 bg-gray-100 rounded text-sm text-gray-600">
+                        <p><em>This memo is auto-generated by the Due Diligence Copilot system.</em></p>
+                        <p><em>Last updated: ${new Date().toLocaleString()}</em></p>
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('memoContent').innerHTML = memoContent;
+            document.getElementById('memoModal').classList.remove('hidden');
+        }
+
+        function closeMemo() {
+            document.getElementById('memoModal').classList.add('hidden');
+        }
+
+        function downloadMemo() {
+            alert('Memo downloaded! Check your Downloads folder for covenant_memo.pdf');
+        }
+
+        // Chatbot Functions
+        let chatHistory = [];
+        let covenantData = null;
+
+        function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const question = input.value.trim();
+            
+            if (!question) return;
+            
+            // Add user message
+            addMessage(question, 'user');
+            
+            // Get AI response
+            const response = getAIResponse(question);
+            setTimeout(() => {
+                addMessage(response, 'assistant');
+            }, 500);
+            
+            // Clear input
+            input.value = '';
+            
+            // Save to history
+            chatHistory.push({ role: 'user', content: question });
+            chatHistory.push({ role: 'assistant', content: response });
+        }
+
+        function addMessage(text, role) {
+            const chatMessages = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'flex items-start space-x-3';
+            
+            if (role === 'user') {
+                messageDiv.innerHTML = `
+                    <div class="p-2 bg-blue-100 rounded-full">
+                        <i class="fas fa-user text-blue-600"></i>
+                    </div>
+                    <div class="flex-1 p-4 bg-blue-50 rounded-lg">
+                        <p class="text-gray-800">${text}</p>
+                    </div>
+                `;
+            } else {
+                messageDiv.innerHTML = `
+                    <div class="p-2 bg-purple-100 rounded-full">
+                        <i class="fas fa-robot text-purple-600"></i>
+                    </div>
+                    <div class="flex-1 p-4 bg-purple-50 rounded-lg">
+                        <p class="text-gray-800">${text}</p>
+                    </div>
+                `;
+            }
+            
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function getAIResponse(question) {
+            const q = question.toLowerCase();
+            
+            // Leverage ratio questions
+            if (q.includes('leverage')) {
+                return "The leverage ratio is <strong>3.78x</strong>, which exceeds the covenant limit of <strong>3.5x</strong>. This represents a <strong>BREACH</strong> with a negative margin of -0.28x. The company needs to reduce debt or increase EBITDA to restore compliance.";
+            }
+            
+            // Coverage questions
+            if (q.includes('coverage') || q.includes('interest')) {
+                return "The interest coverage ratio is <strong>8.16x</strong>, well above the minimum requirement of <strong>2.0x</strong>. This covenant is in <strong>PASS</strong> status with a healthy margin of +6.16x. The company generates sufficient EBITDA to cover interest expenses.";
+            }
+            
+            // Liquidity questions
+            if (q.includes('liquidity') || q.includes('cash')) {
+                return "The company has <strong>$15,587M</strong> in cash and equivalents, far exceeding the minimum liquidity requirement of <strong>$100M</strong>. This covenant is in <strong>PASS</strong> status with an excellent margin of +$15,487M.";
+            }
+            
+            // Breach questions
+            if (q.includes('breach') || q.includes('violation') || q.includes('fail')) {
+                return "Yes, there is <strong>1 covenant breach</strong> detected:<br><br>🚨 <strong>LEVERAGE BREACH:</strong> The leverage ratio of 3.78x exceeds the 3.5x limit by 0.28x. This requires immediate attention and notification to lenders per the credit agreement.";
+            }
+            
+            // Status questions
+            if (q.includes('status') || q.includes('overall')) {
+                return "The overall covenant status is <strong>BREACH</strong> due to the leverage ratio violation. While the coverage ratio (8.16x) and liquidity ($15,587M) are both passing, the leverage breach requires immediate remediation.";
+            }
+            
+            // Action/recommendation questions
+            if (q.includes('action') || q.includes('do') || q.includes('recommend') || q.includes('should')) {
+                return "Recommended actions:<br><br>1. <strong>Contact legal and finance teams immediately</strong><br>2. <strong>Prepare breach notification</strong> per credit agreement<br>3. <strong>Develop remediation plan</strong> to restore compliance<br>4. <strong>Consider requesting a covenant waiver</strong> from lenders<br>5. <strong>Implement debt reduction strategy</strong> or EBITDA improvement plan";
+            }
+            
+            // Financial metrics
+            if (q.includes('debt') || q.includes('ebitda') || q.includes('financial') || q.includes('metric')) {
+                return "Key financial metrics for Tesla Q2 2025:<br><br>• <strong>Total Debt:</strong> $4,994M<br>• <strong>EBITDA:</strong> $1,322M<br>• <strong>Interest Expense:</strong> $162M<br>• <strong>Cash & Equivalents:</strong> $15,587M<br><br>These metrics are extracted from SEC filings and used to calculate covenant ratios.";
+            }
+            
+            // Company questions
+            if (q.includes('company') || q.includes('tesla')) {
+                return "This analysis is for <strong>Tesla, Inc. (NASDAQ: TSLA)</strong> for the period <strong>Q2 2025</strong>. The data is sourced from SEC CompanyFacts API and the latest 10-Q filing.";
+            }
+            
+            // Help/general questions
+            return "I can help you understand the covenant analysis. Try asking about:<br><br>• Leverage ratio<br>• Interest coverage<br>• Liquidity status<br>• Covenant breaches<br>• Recommended actions<br>• Financial metrics<br><br>What would you like to know?";
+        }
+
+        function clearChat() {
+            if (confirm('Clear all chat history?')) {
+                document.getElementById('chatMessages').innerHTML = `
+                    <div class="flex items-start space-x-3">
+                        <div class="p-2 bg-purple-100 rounded-full">
+                            <i class="fas fa-robot text-purple-600"></i>
+                        </div>
+                        <div class="flex-1 p-4 bg-purple-50 rounded-lg">
+                            <p class="text-gray-800">👋 Hello! I'm your AI Covenant Assistant. I can help you understand the covenant analysis. Try asking:</p>
+                            <ul class="mt-2 space-y-1 text-sm text-gray-600">
+                                <li>• "What is the leverage ratio?"</li>
+                                <li>• "Are there any breaches?"</li>
+                                <li>• "What actions should we take?"</li>
+                                <li>• "Show me the financial metrics"</li>
+                            </ul>
+                        </div>
+                    </div>
+                `;
+                chatHistory = [];
+            }
+        }
+
+        function exportChat() {
+            const chatText = chatHistory.map(msg => 
+                `${msg.role.toUpperCase()}: ${msg.content}`
+            ).join('\n\n');
+            
+            const blob = new Blob([chatText], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'covenant_chat_history.txt';
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        // Email Alert Functions
+        function showEmailAlert() {
+            document.getElementById('emailModal').classList.remove('hidden');
+        }
+
+        function closeEmail() {
+            document.getElementById('emailModal').classList.add('hidden');
+        }
+
+        function showEmailNotification() {
+            // Create toast notification
+            const toast = document.createElement('div');
+            toast.className = 'fixed top-4 right-4 z-50 animate-slide-in';
+            toast.innerHTML = `
+                <div class="bg-gradient-to-r from-orange-600 to-red-600 text-white px-6 py-4 rounded-lg shadow-2xl flex items-center space-x-4 max-w-md">
+                    <div class="flex-shrink-0">
+                        <i class="fas fa-envelope text-3xl animate-pulse"></i>
+                    </div>
+                    <div class="flex-1">
+                        <p class="font-bold text-lg">📧 Email Alert Sent!</p>
+                        <p class="text-sm text-orange-100">Breach notification delivered to 3 recipients</p>
+                    </div>
+                    <button onclick="this.parentElement.parentElement.remove()" class="text-white hover:text-gray-200">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            `;
+            document.body.appendChild(toast);
+            
+            // Auto-remove after 5 seconds
+            setTimeout(() => {
+                toast.remove();
+            }, 5000);
+        }
+
+        async function sendActualEmail() {
+            const emailInput = document.getElementById('additionalEmail');
+            const email = emailInput.value.trim();
+            
+            if (!email) {
+                alert('Please enter an email address');
+                return;
+            }
+            
+            if (!email.includes('@')) {
+                alert('Please enter a valid email address');
+                return;
+            }
+            
+            // Show sending status
+            const btn = event.target.closest('button');
+            const originalHTML = btn.innerHTML;
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Sending...';
+            
+            try {
+                // Create email content
+                const emailData = {
+                    to_email: email,
+                    subject: '🚨 COVENANT BREACH ALERT - Tesla Inc. (Q2 2025)',
+                    body: `
+                        <html>
+                        <head>
+                            <style>
+                                body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+                                .header { background: linear-gradient(135deg, #f97316 0%, #dc2626 100%); color: white; padding: 20px; text-align: center; }
+                                .content { padding: 20px; }
+                                .alert-box { background: #fef2f2; border-left: 4px solid #dc2626; padding: 15px; margin: 20px 0; }
+                                .breach-details { background: #f9fafb; padding: 15px; border-radius: 8px; margin: 15px 0; }
+                                .actions { background: #fffbeb; border-left: 4px solid #f59e0b; padding: 15px; margin: 20px 0; }
+                                table { width: 100%; border-collapse: collapse; margin: 15px 0; }
+                                th, td { padding: 12px; text-align: left; border-bottom: 1px solid #e5e7eb; }
+                                th { background: #f3f4f6; font-weight: bold; }
+                                .pass { color: #059669; }
+                                .breach { color: #dc2626; font-weight: bold; }
+                            </style>
+                        </head>
+                        <body>
+                            <div class="header">
+                                <h1>🚨 COVENANT BREACH ALERT</h1>
+                                <p>Automated Breach Notification from Covenant Monitoring Copilot</p>
+                            </div>
+                            
+                            <div class="content">
+                                <div class="alert-box">
+                                    <h2 style="color: #dc2626; margin-top: 0;">⚠️ IMMEDIATE ACTION REQUIRED</h2>
+                                    <p>A covenant breach has been detected in the latest financial analysis for <strong>Tesla Inc. (Q2 2025)</strong>.</p>
+                                </div>
+                                
+                                <div class="breach-details">
+                                    <h3>Breach Details:</h3>
+                                    <ul>
+                                        <li><strong>Covenant:</strong> Leverage Ratio</li>
+                                        <li><strong>Actual Value:</strong> 3.78x</li>
+                                        <li><strong>Covenant Limit:</strong> 3.5x</li>
+                                        <li><strong>Variance:</strong> -0.28x (8% over limit)</li>
+                                        <li><strong>Status:</strong> <span class="breach">BREACH</span></li>
+                                    </ul>
+                                </div>
+                                
+                                <h3>Complete Covenant Test Results:</h3>
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Test</th>
+                                            <th>Actual</th>
+                                            <th>Limit</th>
+                                            <th>Status</th>
+                                            <th>Margin</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Leverage Ratio</td>
+                                            <td>3.78x</td>
+                                            <td>3.5x</td>
+                                            <td class="breach">❌ BREACH</td>
+                                            <td class="breach">-0.28x</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Interest Coverage</td>
+                                            <td>8.16x</td>
+                                            <td>2.0x</td>
+                                            <td class="pass">✅ PASS</td>
+                                            <td class="pass">+6.16x</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Liquidity</td>
+                                            <td>$15,587M</td>
+                                            <td>$100M</td>
+                                            <td class="pass">✅ PASS</td>
+                                            <td class="pass">+$15,487M</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                
+                                <h3>Financial Metrics:</h3>
+                                <ul>
+                                    <li><strong>Total Debt:</strong> $4,994M</li>
+                                    <li><strong>EBITDA:</strong> $1,322M</li>
+                                    <li><strong>Interest Expense:</strong> $162M</li>
+                                    <li><strong>Cash & Equivalents:</strong> $15,587M</li>
+                                </ul>
+                                
+                                <div class="actions">
+                                    <h3 style="color: #f59e0b; margin-top: 0;">Recommended Actions:</h3>
+                                    <ol>
+                                        <li><strong>Contact legal and finance teams immediately</strong> to discuss breach implications</li>
+                                        <li><strong>Prepare lender notification</strong> per credit agreement requirements</li>
+                                        <li><strong>Develop remediation plan</strong> to restore covenant compliance</li>
+                                        <li><strong>Consider requesting a covenant waiver</strong> from lenders if appropriate</li>
+                                        <li><strong>Implement debt reduction strategy</strong> or EBITDA improvement plan</li>
+                                    </ol>
+                                </div>
+                                
+                                <div style="text-align: center; margin: 30px 0;">
+                                    <a href="http://localhost:3001/final_demo_ui.html" 
+                                       style="display: inline-block; padding: 12px 30px; background: linear-gradient(135deg, #2563eb 0%, #4f46e5 100%); color: white; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 16px;">
+                                        📄 View Full Compliance Report
+                                    </a>
+                                </div>
+                                
+                                <hr style="margin: 30px 0; border: none; border-top: 1px solid #e5e7eb;">
+                                
+                                <p style="font-size: 12px; color: #6b7280;">
+                                    <strong>About this alert:</strong><br>
+                                    This email was automatically generated by the Covenant Monitoring Copilot system using AI-powered document analysis (LandingAI DPT-2) and real-time monitoring (Pathway framework).<br><br>
+                                    <strong>Generated:</strong> ${new Date().toLocaleString()}<br>
+                                    <strong>System:</strong> FinSight Covenant Copilot v1.0<br>
+                                    <strong>Data Source:</strong> SEC CompanyFacts API & 10-Q Filing
+                                </p>
+                            </div>
+                        </body>
+                        </html>
+                    `
+                };
+                
+                // Call backend API to send email
+                const response = await fetch('http://localhost:8000/api/send-email', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(emailData)
+                });
+                
+                if (response.ok) {
+                    // Success!
+                    btn.innerHTML = '<i class="fas fa-check mr-2"></i>Sent!';
+                    btn.className = 'px-6 py-2 bg-green-600 text-white font-bold rounded-lg';
+                    
+                    // Show success notification
+                    const successToast = document.createElement('div');
+                    successToast.className = 'fixed top-4 right-4 z-50 animate-slide-in';
+                    successToast.innerHTML = `
+                        <div class="bg-green-600 text-white px-6 py-4 rounded-lg shadow-2xl flex items-center space-x-4">
+                            <i class="fas fa-check-circle text-2xl"></i>
+                            <div>
+                                <p class="font-bold">Email Sent Successfully!</p>
+                                <p class="text-sm">Check ${email} for the breach alert</p>
+                            </div>
+                        </div>
+                    `;
+                    document.body.appendChild(successToast);
+                    setTimeout(() => successToast.remove(), 5000);
+                    
+                    // Clear input
+                    emailInput.value = '';
+                    
+                    // Reset button after 3 seconds
+                    setTimeout(() => {
+                        btn.disabled = false;
+                        btn.innerHTML = originalHTML;
+                        btn.className = 'px-6 py-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold rounded-lg hover:scale-105 transition-all';
+                    }, 3000);
+                } else {
+                    throw new Error('Failed to send email');
+                }
+            } catch (error) {
+                console.error('Error sending email:', error);
+                btn.disabled = false;
+                btn.innerHTML = originalHTML;
+                alert('Failed to send email. Please check the backend is running and try again.');
+            }
+        }
+    </script>
+
+</body>
+</html>

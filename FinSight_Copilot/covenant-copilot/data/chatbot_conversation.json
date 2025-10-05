@@ -1,0 +1,34 @@
+[
+  {
+    "role": "user",
+    "content": "What is the overall covenant status?"
+  },
+  {
+    "role": "assistant",
+    "content": "The overall covenant status for Tesla, Inc. is **BREACH**. There are 1 red flag(s) detected."
+  },
+  {
+    "role": "user",
+    "content": "What is the leverage ratio?"
+  },
+  {
+    "role": "assistant",
+    "content": "The leverage ratio is 3.78x against a limit of 2.8x. Status: BREACH. Margin: -0.98x."
+  },
+  {
+    "role": "user",
+    "content": "Are there any breaches?"
+  },
+  {
+    "role": "assistant",
+    "content": "Yes, there are 1 breach(es):\n- \ud83d\udea8 LEVERAGE BREACH: 3.78x exceeds 2.8x limit\n"
+  },
+  {
+    "role": "user",
+    "content": "What actions should we take?"
+  },
+  {
+    "role": "assistant",
+    "content": "Recommended actions:\n1. Contact legal and finance teams immediately\n2. Prepare breach notification per credit agreement\n3. Develop remediation plan to restore compliance\n4. Consider requesting covenant waiver if appropriate"
+  }
+]

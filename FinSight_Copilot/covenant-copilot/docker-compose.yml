@@ -1,0 +1,57 @@
+version: '3.8'
+
+services:
+  api:
+    build:
+      context: ./apps/api
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=sqlite:///./copilot.db
+      - LANDING_AI_API_KEY=${LANDING_AI_API_KEY}
+      - SMTP_HOST=${SMTP_HOST}
+      - SMTP_PORT=${SMTP_PORT}
+      - SMTP_USER=${SMTP_USER}
+      - SMTP_PASS=${SMTP_PASS}
+    volumes:
+      - ./data:/app/data
+      - ./memos:/app/memos
+    depends_on:
+      - db
+
+  web:
+    build:
+      context: ./apps/web
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_API_URL=http://api:8000
+    depends_on:
+      - api
+
+  mcp:
+    build:
+      context: ./apps/mcp
+      dockerfile: Dockerfile
+    environment:
+      - LANDING_AI_API_KEY=${LANDING_AI_API_KEY}
+    volumes:
+      - ./data:/app/data
+    depends_on:
+      - api
+
+  db:
+    image: postgres:15
+    environment:
+      - POSTGRES_DB=covenant_copilot
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+volumes:
+  postgres_data:
