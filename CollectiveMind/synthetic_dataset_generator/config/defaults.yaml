@@ -1,0 +1,53 @@
+organization:
+  company_name: "TechNova Inc"
+  employee_count: 25
+  teams: ["Marketing", "Product", "Engineering", "Finance", "HR"]
+  manager_count: 3
+
+content_volumes:
+  documents: 160
+  chat_threads: 220
+  chat_messages_min: 2200
+  chat_messages_max: 2800
+  meetings: 30
+  weekly_briefs: 17
+  knowledge_graph_edges: 2500
+  topics: 60
+  overlaps_min: 15
+  overlaps_max: 25
+
+temporal:
+  start_date: "2024-01-01"
+  end_date: "2025-10-24"
+  business_hours: "09:00-17:00"
+  timezones: 
+    - "America/Los_Angeles"
+    - "America/New_York"
+    - "Europe/London"
+
+output:
+  format: "jsonl"
+  compression: false
+  validation: true
+  manifest: true
+  output_dir: "technova_dataset"
+
+demo_personas:
+  - name: "Maya Chen"
+    role: "Product Manager"
+    team: "Product"
+  - name: "Rahul Sharma"
+    role: "Marketing Analyst"
+    team: "Marketing"
+  - name: "Priya Patel"
+    role: "New Hire"
+    team: "Product"
+
+# Edge case configurations
+edge_cases:
+  duplicate_discussions: 25
+  emotional_threads: 20
+  restricted_finance_docs: 10
+  mis_permissioned_docs: 3
+  non_english_docs: 5
+  version_trail_docs: 12

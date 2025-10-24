@@ -1,0 +1,78 @@
+{
+  "mcpServers": {
+    "elasticsearch-tools": {
+      "command": "uvx",
+      "args": ["mcp-elasticsearch@latest"],
+      "env": {
+        "ELASTICSEARCH_URL": "http://localhost:9200",
+        "FASTMCP_LOG_LEVEL": "ERROR"
+      },
+      "disabled": false,
+      "autoApprove": [
+        "search_documents",
+        "get_document_by_id",
+        "search_aggregations"
+      ]
+    },
+    "knowledge-graph": {
+      "command": "uvx", 
+      "args": ["mcp-knowledge-graph@latest"],
+      "env": {
+        "DATABASE_URL": "postgresql://collectivemind:password@localhost:5432/collectivemind",
+        "FASTMCP_LOG_LEVEL": "ERROR"
+      },
+      "disabled": false,
+      "autoApprove": [
+        "find_connections",
+        "get_team_relationships",
+        "analyze_collaboration_patterns"
+      ]
+    },
+    "analytics-tools": {
+      "command": "uvx",
+      "args": ["mcp-analytics@latest"], 
+      "env": {
+        "DATABASE_URL": "postgresql://collectivemind:password@localhost:5432/collectivemind",
+        "ELASTICSEARCH_URL": "http://localhost:9200",
+        "FASTMCP_LOG_LEVEL": "ERROR"
+      },
+      "disabled": false,
+      "autoApprove": [
+        "get_usage_metrics",
+        "analyze_search_patterns",
+        "generate_insights_report"
+      ]
+    },
+    "collaboration-tools": {
+      "command": "uvx",
+      "args": ["mcp-collaboration@latest"],
+      "env": {
+        "REDIS_URL": "redis://localhost:6379",
+        "FASTMCP_LOG_LEVEL": "ERROR"
+      },
+      "disabled": false,
+      "autoApprove": [
+        "schedule_meeting",
+        "create_shared_workspace", 
+        "send_team_notification",
+        "find_available_experts"
+      ]
+    },
+    "serendipity-engine": {
+      "command": "uvx",
+      "args": ["mcp-serendipity@latest"],
+      "env": {
+        "ELASTICSEARCH_URL": "http://localhost:9200",
+        "DATABASE_URL": "postgresql://collectivemind:password@localhost:5432/collectivemind",
+        "FASTMCP_LOG_LEVEL": "ERROR"
+      },
+      "disabled": false,
+      "autoApprove": [
+        "detect_cross_team_opportunities",
+        "find_knowledge_gaps",
+        "suggest_collaborations",
+        "analyze_topic_overlaps"
+      ]
+    }
+  }
+}

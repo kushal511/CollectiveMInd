@@ -1,0 +1,66 @@
+{"topic_id":"TOPIC_001","name":"customer churn","aliases":["customer_churn"],"emerging_score":0.5004427390908152,"related_topic_ids":["TOPIC_025","TOPIC_004","TOPIC_053","TOPIC_015"]}
+{"topic_id":"TOPIC_002","name":"onboarding experience","aliases":["onboarding_experience"],"emerging_score":0.432372270119186,"related_topic_ids":["TOPIC_034","TOPIC_035","TOPIC_029","TOPIC_030"]}
+{"topic_id":"TOPIC_003","name":"pricing strategy","aliases":["pricing_strategy"],"emerging_score":0.5534728814871768,"related_topic_ids":["TOPIC_018","TOPIC_047","TOPIC_028"]}
+{"topic_id":"TOPIC_004","name":"user engagement","aliases":["user_engagement"],"emerging_score":0.481733103762667,"related_topic_ids":["TOPIC_016","TOPIC_060","TOPIC_035","TOPIC_029"]}
+{"topic_id":"TOPIC_005","name":"performance metrics","aliases":["performance_metrics"],"emerging_score":0.44137280292168235,"related_topic_ids":["TOPIC_040","TOPIC_008","TOPIC_043","TOPIC_062"]}
+{"topic_id":"TOPIC_006","name":"quarterly planning","aliases":["quarterly_planning"],"emerging_score":0.5802992932762601,"related_topic_ids":["TOPIC_045"]}
+{"topic_id":"TOPIC_007","name":"system performance","aliases":["system_performance"],"emerging_score":0.3195167463795627,"related_topic_ids":["TOPIC_062","TOPIC_037","TOPIC_031"]}
+{"topic_id":"TOPIC_008","name":"data analytics","aliases":["data_analytics"],"emerging_score":0.4256904825155346,"related_topic_ids":["TOPIC_031","TOPIC_055"]}
+{"topic_id":"TOPIC_009","name":"mobile app","aliases":["mobile_app"],"emerging_score":0.5285599022770732,"related_topic_ids":[]}
+{"topic_id":"TOPIC_010","name":"API integration","aliases":["API_integration","API","application_programming_interface"],"emerging_score":0.5694076536575385,"related_topic_ids":["TOPIC_061"]}
+{"topic_id":"TOPIC_011","name":"security framework","aliases":["security_framework"],"emerging_score":0.4666897386636797,"related_topic_ids":[]}
+{"topic_id":"TOPIC_012","name":"cloud migration","aliases":["cloud_migration"],"emerging_score":0.39124125030872947,"related_topic_ids":[]}
+{"topic_id":"TOPIC_013","name":"feature rollout","aliases":["feature_rollout"],"emerging_score":0.401068321464512,"related_topic_ids":["TOPIC_004","TOPIC_030","TOPIC_032","TOPIC_036"]}
+{"topic_id":"TOPIC_014","name":"market expansion","aliases":["market_expansion"],"emerging_score":0.585321088502805,"related_topic_ids":["TOPIC_026"]}
+{"topic_id":"TOPIC_015","name":"customer feedback","aliases":["customer_feedback"],"emerging_score":0.4236670198624676,"related_topic_ids":["TOPIC_065","TOPIC_001"]}
+{"topic_id":"TOPIC_016","name":"product roadmap","aliases":["product_roadmap"],"emerging_score":0.455608342595861,"related_topic_ids":["TOPIC_065","TOPIC_030","TOPIC_032"]}
+{"topic_id":"TOPIC_017","name":"revenue growth","aliases":["revenue_growth"],"emerging_score":0.48085061439003907,"related_topic_ids":["TOPIC_049","TOPIC_046"]}
+{"topic_id":"TOPIC_018","name":"cost optimization","aliases":["cost_optimization"],"emerging_score":0.3604144446880588,"related_topic_ids":["TOPIC_046","TOPIC_062","TOPIC_047"]}
+{"topic_id":"TOPIC_019","name":"team collaboration","aliases":["team_collaboration"],"emerging_score":0.4076053413727352,"related_topic_ids":["TOPIC_058"]}
+{"topic_id":"TOPIC_020","name":"process improvement","aliases":["process_improvement"],"emerging_score":0.49613377357982125,"related_topic_ids":["TOPIC_021","TOPIC_065","TOPIC_039"]}
+{"topic_id":"TOPIC_021","name":"campaign optimization","aliases":["marketing campaign optimization","campaign_optimization"],"emerging_score":0.3627775347441814,"related_topic_ids":["TOPIC_055","TOPIC_062"]}
+{"topic_id":"TOPIC_022","name":"brand awareness","aliases":["marketing brand awareness","brand_awareness"],"emerging_score":0.14108106520693858,"related_topic_ids":[]}
+{"topic_id":"TOPIC_023","name":"lead generation","aliases":["marketing lead generation","lead_generation"],"emerging_score":0.24966684850524223,"related_topic_ids":[]}
+{"topic_id":"TOPIC_024","name":"conversion rates","aliases":["marketing conversion rates","conversion_rates"],"emerging_score":0.2972787692752321,"related_topic_ids":[]}
+{"topic_id":"TOPIC_025","name":"customer acquisition","aliases":["marketing customer acquisition","customer_acquisition"],"emerging_score":0.29641316954891805,"related_topic_ids":["TOPIC_001","TOPIC_015","TOPIC_053","TOPIC_054"]}
+{"topic_id":"TOPIC_026","name":"market research","aliases":["marketing market research","market_research"],"emerging_score":0.15005884955988813,"related_topic_ids":["TOPIC_014","TOPIC_032"]}
+{"topic_id":"TOPIC_027","name":"competitive analysis","aliases":["marketing competitive analysis","competitive_analysis"],"emerging_score":0.13305009416577232,"related_topic_ids":["TOPIC_047"]}
+{"topic_id":"TOPIC_028","name":"content strategy","aliases":["marketing content strategy","content_strategy"],"emerging_score":0.29052104155268704,"related_topic_ids":["TOPIC_003"]}
+{"topic_id":"TOPIC_029","name":"user experience","aliases":["product user experience","user_experience","UX","user_experience"],"emerging_score":0.1831189037502406,"related_topic_ids":["TOPIC_002","TOPIC_013"]}
+{"topic_id":"TOPIC_030","name":"feature prioritization","aliases":["product feature prioritization","feature_prioritization"],"emerging_score":0.23239390767241766,"related_topic_ids":["TOPIC_016","TOPIC_065"]}
+{"topic_id":"TOPIC_031","name":"product analytics","aliases":["product product analytics","product_analytics"],"emerging_score":0.1454499872449135,"related_topic_ids":["TOPIC_035","TOPIC_055","TOPIC_034","TOPIC_043"]}
+{"topic_id":"TOPIC_032","name":"user research","aliases":["product user research","user_research"],"emerging_score":0.10208535965149956,"related_topic_ids":["TOPIC_029","TOPIC_036","TOPIC_026"]}
+{"topic_id":"TOPIC_033","name":"A/B testing","aliases":["product A/B testing","A/B_testing"],"emerging_score":0.3205997414142927,"related_topic_ids":[]}
+{"topic_id":"TOPIC_034","name":"product metrics","aliases":["product product metrics","product_metrics"],"emerging_score":0.1997673351614731,"related_topic_ids":["TOPIC_065","TOPIC_032"]}
+{"topic_id":"TOPIC_035","name":"feature adoption","aliases":["product feature adoption","feature_adoption"],"emerging_score":0.3925212482276368,"related_topic_ids":["TOPIC_013","TOPIC_036"]}
+{"topic_id":"TOPIC_036","name":"user journey","aliases":["product user journey","user_journey"],"emerging_score":0.3477762345545734,"related_topic_ids":["TOPIC_030","TOPIC_031"]}
+{"topic_id":"TOPIC_037","name":"system architecture","aliases":["engineering system architecture","system_architecture"],"emerging_score":0.15354112245295715,"related_topic_ids":["TOPIC_055","TOPIC_044","TOPIC_041"]}
+{"topic_id":"TOPIC_038","name":"code quality","aliases":["engineering code quality","code_quality"],"emerging_score":0.19914634483010485,"related_topic_ids":[]}
+{"topic_id":"TOPIC_039","name":"deployment automation","aliases":["engineering deployment automation","deployment_automation"],"emerging_score":0.30521896844740604,"related_topic_ids":["TOPIC_020","TOPIC_065"]}
+{"topic_id":"TOPIC_040","name":"monitoring","aliases":["engineering monitoring"],"emerging_score":0.2520303455612072,"related_topic_ids":["TOPIC_034","TOPIC_005","TOPIC_055"]}
+{"topic_id":"TOPIC_041","name":"scalability","aliases":["engineering scalability"],"emerging_score":0.26414296500842016,"related_topic_ids":["TOPIC_037","TOPIC_007"]}
+{"topic_id":"TOPIC_042","name":"technical debt","aliases":["engineering technical debt","technical_debt"],"emerging_score":0.14956935587388986,"related_topic_ids":[]}
+{"topic_id":"TOPIC_043","name":"performance optimization","aliases":["engineering performance optimization","performance_optimization"],"emerging_score":0.17904868254680312,"related_topic_ids":["TOPIC_031","TOPIC_005","TOPIC_055","TOPIC_062"]}
+{"topic_id":"TOPIC_044","name":"infrastructure","aliases":["engineering infrastructure"],"emerging_score":0.11165019274866998,"related_topic_ids":["TOPIC_037","TOPIC_007"]}
+{"topic_id":"TOPIC_045","name":"budget planning","aliases":["finance budget planning","budget_planning"],"emerging_score":0.10702605084824858,"related_topic_ids":["TOPIC_051","TOPIC_003","TOPIC_046","TOPIC_006"]}
+{"topic_id":"TOPIC_046","name":"financial forecasting","aliases":["finance financial forecasting","financial_forecasting"],"emerging_score":0.35475919266966605,"related_topic_ids":["TOPIC_051","TOPIC_045"]}
+{"topic_id":"TOPIC_047","name":"cost analysis","aliases":["finance cost analysis","cost_analysis"],"emerging_score":0.25668111200373195,"related_topic_ids":["TOPIC_018","TOPIC_051","TOPIC_046"]}
+{"topic_id":"TOPIC_048","name":"ROI measurement","aliases":["finance ROI measurement","ROI_measurement","ROI","return_on_investment"],"emerging_score":0.188067589292914,"related_topic_ids":[]}
+{"topic_id":"TOPIC_049","name":"revenue tracking","aliases":["finance revenue tracking","revenue_tracking"],"emerging_score":0.34366097745236107,"related_topic_ids":["TOPIC_051","TOPIC_046","TOPIC_017"]}
+{"topic_id":"TOPIC_050","name":"expense management","aliases":["finance expense management","expense_management"],"emerging_score":0.11860657029246671,"related_topic_ids":["TOPIC_055"]}
+{"topic_id":"TOPIC_051","name":"financial reporting","aliases":["finance financial reporting","financial_reporting"],"emerging_score":0.3926010564070834,"related_topic_ids":["TOPIC_018","TOPIC_049","TOPIC_046","TOPIC_047"]}
+{"topic_id":"TOPIC_052","name":"risk assessment","aliases":["finance risk assessment","risk_assessment"],"emerging_score":0.14258827564005253,"related_topic_ids":[]}
+{"topic_id":"TOPIC_053","name":"employee engagement","aliases":["hr employee engagement","employee_engagement"],"emerging_score":0.1514237167893397,"related_topic_ids":["TOPIC_004","TOPIC_001"]}
+{"topic_id":"TOPIC_054","name":"talent acquisition","aliases":["hr talent acquisition","talent_acquisition"],"emerging_score":0.38351521172988157,"related_topic_ids":["TOPIC_025"]}
+{"topic_id":"TOPIC_055","name":"performance management","aliases":["hr performance management","performance_management"],"emerging_score":0.17431340355410618,"related_topic_ids":["TOPIC_008","TOPIC_062","TOPIC_037","TOPIC_043"]}
+{"topic_id":"TOPIC_056","name":"training","aliases":["hr training"],"emerging_score":0.3834951063985482,"related_topic_ids":[]}
+{"topic_id":"TOPIC_057","name":"company culture","aliases":["hr company culture","company_culture"],"emerging_score":0.3058004828182318,"related_topic_ids":[]}
+{"topic_id":"TOPIC_058","name":"team building","aliases":["hr team building","team_building"],"emerging_score":0.30647675985074774,"related_topic_ids":["TOPIC_019"]}
+{"topic_id":"TOPIC_059","name":"compensation","aliases":["hr compensation"],"emerging_score":0.32584492014783634,"related_topic_ids":[]}
+{"topic_id":"TOPIC_060","name":"employee retention","aliases":["hr employee retention","employee_retention"],"emerging_score":0.1562474723729976,"related_topic_ids":["TOPIC_001","TOPIC_015"]}
+{"topic_id":"TOPIC_061","name":"AI integration","aliases":["AI_integration"],"emerging_score":0.7189294349657794,"related_topic_ids":["TOPIC_010"]}
+{"topic_id":"TOPIC_062","name":"remote work optimization","aliases":["remote_work_optimization"],"emerging_score":0.7349732412578186,"related_topic_ids":["TOPIC_018","TOPIC_005"]}
+{"topic_id":"TOPIC_063","name":"sustainability initiatives","aliases":["sustainability_initiatives"],"emerging_score":0.7887245876905433,"related_topic_ids":[]}
+{"topic_id":"TOPIC_064","name":"digital transformation","aliases":["digital_transformation"],"emerging_score":0.8471700261295058,"related_topic_ids":[]}
+{"topic_id":"TOPIC_065","name":"customer experience automation","aliases":["customer_experience_automation"],"emerging_score":0.7359498460423265,"related_topic_ids":["TOPIC_020","TOPIC_029"]}
+{"topic_id":"TOPIC_066","name":"data privacy compliance","aliases":["data_privacy_compliance"],"emerging_score":0.888056989860181,"related_topic_ids":["TOPIC_008"]}

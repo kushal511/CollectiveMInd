@@ -1,0 +1,407 @@
+import { elasticsearchClient, INDICES } from '../config/elasticsearch';
+import { logger } from '../utils/logger';
+
+// Helper function for delays
+const delay = (ms: number): Promise<void> => new Promise(resolve => setTimeout(resolve, ms));
+
+export interface EmbeddingProgress {
+    totalDocuments: number;
+    processedDocuments: number;
+    totalMessages: number;
+    processedMessages: number;
+    errors: string[];
+    status: 'pending' | 'running' | 'completed' | 'failed';
+}
+
+export class EmbeddingService {
+    private progress: EmbeddingProgress = {
+        totalDocuments: 0,
+        processedDocuments: 0,
+        totalMessages: 0,
+        processedMessages: 0,
+        errors: [],
+        status: 'pending'
+    };
+
+    private vertexAI: any = null;
+
+    constructor() {
+        this.initializeVertexAI();
+    }
+
+    private async initializeVertexAI() {
+        try {
+            // Validate required environment variables
+            if (!process.env.GOOGLE_CLOUD_PROJECT_ID) {
+                throw new Error('GOOGLE_CLOUD_PROJECT_ID environment variable is required');
+            }
+
+            // Try to use AI Platform client for embeddings
+            try {
+                const { PredictionServiceClient } = require('@google-cloud/aiplatform');
+                this.vertexAI = new PredictionServiceClient({
+                    apiEndpoint: `${process.env.GOOGLE_CLOUD_LOCATION || 'us-central1'}-aiplatform.googleapis.com`
+                });
+                logger.info('Google Cloud AI Platform initialized successfully for embeddings');
+            } catch (aiPlatformError) {
+                // Fallback to Vertex AI SDK
+                const { VertexAI } = require('@google-cloud/vertexai');
+                this.vertexAI = new VertexAI({
+                    project: process.env.GOOGLE_CLOUD_PROJECT_ID,
+                    location: process.env.GOOGLE_CLOUD_LOCATION || 'us-central1',
+                });
+                logger.info('Vertex AI SDK initialized successfully');
+            }
+
+        } catch (error) {
+            const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+            logger.error('Failed to initialize Vertex AI:', errorMessage);
+            throw new Error(`Vertex AI initialization failed: ${errorMessage}`);
+        }
+    }
+
+    async generateAllEmbeddings(): Promise<EmbeddingProgress> {
+        try {
+            this.progress.status = 'running';
+            logger.info('Starting embedding generation for all content');
+
+            // Generate embeddings for documents
+            await this.generateDocumentEmbeddings();
+
+            // Generate embeddings for messages
+            await this.generateMessageEmbeddings();
+
+            // Generate embeddings for people (expertise)
+            await this.generatePeopleEmbeddings();
+
+            // Generate embeddings for topics
+            await this.generateTopicEmbeddings();
+
+            this.progress.status = 'completed';
+            logger.info('Embedding generation completed successfully');
+            return this.progress;
+
+        } catch (error) {
+            this.progress.status = 'failed';
+            const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+            this.progress.errors.push(`Embedding generation failed: ${errorMessage}`);
+            logger.error('Embedding generation failed:', error);
+            throw error;
+        }
+    }
+
+    private async generateDocumentEmbeddings(): Promise<void> {
+        logger.info('Generating embeddings for documents');
+
+        // Get documents without embeddings
+        const searchResponse = await elasticsearchClient.search({
+            index: INDICES.DOCUMENTS,
+            body: {
+                query: {
+                    bool: {
+                        must_not: {
+                            exists: { field: 'content_vector' }
+                        }
+                    }
+                },
+                size: 100, // Process in batches
+                _source: ['doc_id', 'title', 'content', 'full_text']
+            },
+            scroll: '5m'
+        });
+
+        this.progress.totalDocuments = searchResponse.hits.total.value;
+        let scrollId = searchResponse._scroll_id;
+
+        while (searchResponse.hits.hits.length > 0) {
+            const batch = searchResponse.hits.hits;
+            await this.processBatchEmbeddings(batch, 'documents');
+
+            this.progress.processedDocuments += batch.length;
+
+            // Get next batch
+            if (scrollId) {
+                const scrollResponse = await elasticsearchClient.scroll({
+                    scroll_id: scrollId,
+                    scroll: '5m'
+                });
+                scrollId = scrollResponse._scroll_id;
+                searchResponse.hits.hits = scrollResponse.hits.hits;
+            } else {
+                break;
+            }
+        }
+
+        // Clear scroll
+        if (scrollId) {
+            await elasticsearchClient.clearScroll({ scroll_id: scrollId });
+        }
+    }
+
+    private async generateMessageEmbeddings(): Promise<void> {
+        logger.info('Generating embeddings for messages');
+
+        const searchResponse = await elasticsearchClient.search({
+            index: INDICES.MESSAGES,
+            body: {
+                query: {
+                    bool: {
+                        must_not: {
+                            exists: { field: 'text_vector' }
+                        }
+                    }
+                },
+                size: 100,
+                _source: ['message_id', 'text']
+            },
+            scroll: '5m'
+        });
+
+        this.progress.totalMessages = searchResponse.hits.total.value;
+        let scrollId = searchResponse._scroll_id;
+
+        while (searchResponse.hits.hits.length > 0) {
+            const batch = searchResponse.hits.hits;
+            await this.processBatchEmbeddings(batch, 'messages');
+
+            this.progress.processedMessages += batch.length;
+
+            if (scrollId) {
+                const scrollResponse = await elasticsearchClient.scroll({
+                    scroll_id: scrollId,
+                    scroll: '5m'
+                });
+                scrollId = scrollResponse._scroll_id;
+                searchResponse.hits.hits = scrollResponse.hits.hits;
+            } else {
+                break;
+            }
+        }
+
+        if (scrollId) {
+            await elasticsearchClient.clearScroll({ scroll_id: scrollId });
+        }
+    }
+
+    private async generatePeopleEmbeddings(): Promise<void> {
+        logger.info('Generating embeddings for people expertise');
+
+        const searchResponse = await elasticsearchClient.search({
+            index: INDICES.PEOPLE,
+            body: {
+                query: {
+                    bool: {
+                        must_not: {
+                            exists: { field: 'expertise_vector' }
+                        }
+                    }
+                },
+                size: 100,
+                _source: ['person_id', 'expertise_areas', 'bio', 'role_title']
+            }
+        });
+
+        const people = searchResponse.hits.hits;
+        if (people.length > 0) {
+            await this.processBatchEmbeddings(people, 'people');
+        }
+    }
+
+    private async generateTopicEmbeddings(): Promise<void> {
+        logger.info('Generating embeddings for topics');
+
+        const searchResponse = await elasticsearchClient.search({
+            index: INDICES.TOPICS,
+            body: {
+                query: {
+                    bool: {
+                        must_not: {
+                            exists: { field: 'topic_vector' }
+                        }
+                    }
+                },
+                size: 100,
+                _source: ['topic_id', 'name', 'description']
+            }
+        });
+
+        const topics = searchResponse.hits.hits;
+        if (topics.length > 0) {
+            await this.processBatchEmbeddings(topics, 'topics');
+        }
+    }
+
+    private async processBatchEmbeddings(
+        batch: any[],
+        type: 'documents' | 'messages' | 'people' | 'topics'
+    ): Promise<void> {
+        try {
+            // Prepare texts for embedding
+            const texts = batch.map(item => {
+                const source = item._source;
+                switch (type) {
+                    case 'documents':
+                        return source.full_text || `${source.title} ${source.content}`;
+                    case 'messages':
+                        return source.text;
+                    case 'people':
+                        return `${source.role_title} ${source.expertise_areas} ${source.bio || ''}`.trim();
+                    case 'topics':
+                        return `${source.name} ${source.description || ''}`.trim();
+                    default:
+                        return '';
+                }
+            }).filter(text => text.length > 0);
+
+            if (texts.length === 0) return;
+
+            // Generate embeddings using Vertex AI
+            const embeddings = await this.generateEmbeddings(texts);
+
+            // Prepare bulk update
+            const bulkBody = [];
+            for (let i = 0; i < batch.length; i++) {
+                const item = batch[i];
+                const embedding = embeddings[i];
+
+                if (embedding) {
+                    const vectorField = this.getVectorFieldName(type);
+                    const updateDoc = { [vectorField]: embedding };
+
+                    bulkBody.push(
+                        { update: { _index: item._index, _id: item._id } },
+                        { doc: updateDoc }
+                    );
+                }
+            }
+
+            // Execute bulk update
+            if (bulkBody.length > 0) {
+                const response = await elasticsearchClient.bulk({ body: bulkBody });
+
+                if (response.errors) {
+                    const errors = response.items
+                        .filter((item: any) => item.update?.error)
+                        .map((item: any) => item.update?.error?.reason);
+                    logger.warn(`Some ${type} embeddings failed to update:`, errors);
+                }
+            }
+
+            logger.info(`Generated embeddings for ${batch.length} ${type}`);
+
+        } catch (error) {
+            const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+            const errorMsg = `Failed to process ${type} embeddings batch: ${errorMessage}`;
+            this.progress.errors.push(errorMsg);
+            logger.error(errorMsg);
+        }
+    }
+
+    private async generateEmbeddings(texts: string[]): Promise<number[][]> {
+        if (!this.vertexAI) {
+            throw new Error('Vertex AI not initialized. Cannot generate embeddings.');
+        }
+
+        try {
+            logger.info(`Generating embeddings for ${texts.length} texts using Vertex AI`);
+            const embeddings: number[][] = [];
+
+            const projectId = process.env.GOOGLE_CLOUD_PROJECT_ID;
+            const location = process.env.GOOGLE_CLOUD_LOCATION || 'us-central1';
+            const model = 'text-embedding-004';
+
+            // Process texts in smaller batches to respect API limits
+            const batchSize = 5;
+            for (let i = 0; i < texts.length; i += batchSize) {
+                const textBatch = texts.slice(i, i + batchSize);
+
+                for (const text of textBatch) {
+                    try {
+                        // Prepare the request for text embedding
+                        const instances = [
+                            {
+                                content: text,
+                                task_type: 'RETRIEVAL_DOCUMENT'
+                            }
+                        ];
+
+                        const parameters = {
+                            outputDimensionality: 768
+                        };
+
+                        // Construct the endpoint path
+                        const endpoint = `projects/${projectId}/locations/${location}/publishers/google/models/${model}`;
+
+                        // Make the prediction request
+                        const [response] = await this.vertexAI.predict({
+                            endpoint: endpoint,
+                            instances: instances,
+                            parameters: parameters
+                        });
+
+                        // Extract embedding from response
+                        if (response.predictions && response.predictions.length > 0) {
+                            const prediction = response.predictions[0];
+                            const embedding = prediction.embeddings?.values || prediction.values;
+
+                            if (embedding && Array.isArray(embedding)) {
+                                embeddings.push(embedding);
+                                logger.debug(`Generated embedding for text (${text.substring(0, 50)}...)`);
+                            } else {
+                                throw new Error('Invalid embedding response format');
+                            }
+                        } else {
+                            throw new Error('No predictions in response');
+                        }
+
+                    } catch (error) {
+                        const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+                        logger.error(`Failed to generate embedding for text: ${errorMessage}`);
+
+                        // For development, you might want to continue with other texts
+                        // In production, you should decide whether to fail fast or continue
+                        throw new Error(`Embedding generation failed: ${errorMessage}`);
+                    }
+                }
+
+                // Add delay to respect rate limits (100 requests per minute)
+                await delay(600); // 600ms delay = ~100 requests per minute
+            }
+
+            logger.info(`Successfully generated ${embeddings.length} embeddings`);
+            return embeddings;
+
+        } catch (error) {
+            const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+            logger.error('Batch embedding generation failed:', errorMessage);
+            throw error;
+        }
+    }
+
+
+
+    private getVectorFieldName(type: string): string {
+        switch (type) {
+            case 'documents': return 'content_vector';
+            case 'messages': return 'text_vector';
+            case 'people': return 'expertise_vector';
+            case 'topics': return 'topic_vector';
+            default: return 'vector';
+        }
+    }
+
+    async generateQueryEmbedding(query: string): Promise<number[]> {
+        try {
+            const embeddings = await this.generateEmbeddings([query]);
+            return embeddings[0];
+        } catch (error) {
+            const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+            logger.error('Failed to generate query embedding:', errorMessage);
+            throw error;
+        }
+    }
+
+    getProgress(): EmbeddingProgress {
+        return { ...this.progress };
+    }
+}

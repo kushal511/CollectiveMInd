@@ -1,0 +1,170 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  username  String   @unique
+  password  String
+  firstName String?
+  lastName  String?
+  avatar    String?
+  role      String   @default("USER")
+  
+  // Timestamps
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  // Relations
+  knowledgeItems KnowledgeItem[]
+  comments       Comment[]
+  votes          Vote[]
+  sessions       Session[]
+  
+  @@map("users")
+}
+
+model Session {
+  id        String   @id @default(cuid())
+  userId    String
+  token     String   @unique
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+  
+  // Relations
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  @@map("sessions")
+}
+
+model KnowledgeItem {
+  id          String   @id @default(cuid())
+  title       String
+  content     String
+  summary     String?
+  tags        String?  // JSON string for demo
+  category    String?
+  source      String?
+  sourceUrl   String?
+  author      String
+  authorId    String?
+  
+  // AI-generated fields (simplified for SQLite)
+  embedding   String?  // JSON string of float array
+  keywords    String?  // JSON string of keywords array
+  sentiment   Float?
+  confidence  Float?
+  
+  // Metadata
+  views       Int      @default(0)
+  upvotes     Int      @default(0)
+  downvotes   Int      @default(0)
+  
+  // Timestamps
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  // Relations
+  user        User?     @relation(fields: [authorId], references: [id])
+  comments    Comment[]
+  votes       Vote[]
+  connections Connection[] @relation("SourceItem")
+  connectedTo Connection[] @relation("TargetItem")
+  
+  @@map("knowledge_items")
+}
+
+model Comment {
+  id              String   @id @default(cuid())
+  content         String
+  authorId        String
+  knowledgeItemId String
+  parentId        String?
+  
+  // Timestamps
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  // Relations
+  author        User          @relation(fields: [authorId], references: [id])
+  knowledgeItem KnowledgeItem @relation(fields: [knowledgeItemId], references: [id], onDelete: Cascade)
+  parent        Comment?      @relation("CommentReplies", fields: [parentId], references: [id])
+  replies       Comment[]     @relation("CommentReplies")
+  
+  @@map("comments")
+}
+
+model Vote {
+  id              String    @id @default(cuid())
+  userId          String
+  knowledgeItemId String
+  type            String    // "UPVOTE" or "DOWNVOTE"
+  
+  // Timestamps
+  createdAt DateTime @default(now())
+  
+  // Relations
+  user          User          @relation(fields: [userId], references: [id])
+  knowledgeItem KnowledgeItem @relation(fields: [knowledgeItemId], references: [id], onDelete: Cascade)
+  
+  @@unique([userId, knowledgeItemId])
+  @@map("votes")
+}
+
+model Connection {
+  id           String   @id @default(cuid())
+  sourceId     String
+  targetId     String
+  type         String   // Connection type as string
+  strength     Float    @default(0.5)
+  description  String?
+  
+  // Timestamps
+  createdAt DateTime @default(now())
+  
+  // Relations
+  source KnowledgeItem @relation("SourceItem", fields: [sourceId], references: [id], onDelete: Cascade)
+  target KnowledgeItem @relation("TargetItem", fields: [targetId], references: [id], onDelete: Cascade)
+  
+  @@unique([sourceId, targetId, type])
+  @@map("connections")
+}
+
+model SearchQuery {
+  id        String   @id @default(cuid())
+  query     String
+  userId    String?
+  results   String?  // JSON string
+  embedding String?  // JSON string of float array
+  
+  // Metadata
+  resultCount Int      @default(0)
+  duration    Int?     // milliseconds
+  
+  // Timestamps
+  createdAt DateTime @default(now())
+  
+  @@map("search_queries")
+}
+
+model Analytics {
+  id        String      @id @default(cuid())
+  event     String
+  data      String      // JSON string
+  userId    String?
+  sessionId String?
+  
+  // Timestamps
+  createdAt DateTime @default(now())
+  
+  @@map("analytics")
+}

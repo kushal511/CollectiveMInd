@@ -1,0 +1,78 @@
+{"event_id":"EVENT_0030","person_id":"P_002","event_type":"VIEWED","resource_type":"DOC","resource_id":"DOC_004","timestamp":"2024-01-01T09:00:00","query":null}
+{"event_id":"EVENT_0031","person_id":"P_002","event_type":"SEARCHED","resource_type":"QUERY","resource_id":"SEARCH_QUERY","timestamp":"2024-01-01T09:02:11.143496","query":"customer churn prevention"}
+{"event_id":"EVENT_0032","person_id":"P_002","event_type":"VIEWED","resource_type":"DOC","resource_id":"DOC_021","timestamp":"2024-01-01T09:10:22.774027","query":null}
+{"event_id":"EVENT_0033","person_id":"P_002","event_type":"VIEWED","resource_type":"THREAD","resource_id":"T_190","timestamp":"2024-01-01T09:16:35.574131","query":null}
+{"event_id":"EVENT_0034","person_id":"P_002","event_type":"VIEWED","resource_type":"DOC","resource_id":"DOC_019","timestamp":"2024-01-01T09:23:59.632795","query":null}
+{"event_id":"EVENT_0035","person_id":"P_002","event_type":"VIEWED","resource_type":"DOC","resource_id":"DOC_129","timestamp":"2024-01-01T09:27:43.197713","query":null}
+{"event_id":"EVENT_0001","person_id":"P_001","event_type":"VIEWED","resource_type":"TOPIC","resource_id":"TOPIC_036","timestamp":"2024-01-01T11:07:00","query":null}
+{"event_id":"EVENT_0002","person_id":"P_001","event_type":"SEARCHED","resource_type":"QUERY","resource_id":"SEARCH_QUERY","timestamp":"2024-01-01T11:13:25.874346","query":"user onboarding flow"}
+{"event_id":"EVENT_0003","person_id":"P_001","event_type":"VIEWED","resource_type":"TOPIC","resource_id":"TOPIC_036","timestamp":"2024-01-01T11:20:18.598170","query":null}
+{"event_id":"EVENT_0004","person_id":"P_001","event_type":"VIEWED","resource_type":"TOPIC","resource_id":"TOPIC_050","timestamp":"2024-01-01T11:27:17.256967","query":null}
+{"event_id":"EVENT_0005","person_id":"P_001","event_type":"SEARCHED","resource_type":"QUERY","resource_id":"SEARCH_QUERY","timestamp":"2024-01-01T11:31:04.822116","query":"user experience research"}
+{"event_id":"EVENT_0006","person_id":"P_001","event_type":"VIEWED","resource_type":"DOC","resource_id":"DOC_040","timestamp":"2024-01-01T11:36:23.808940","query":null}
+{"event_id":"EVENT_0007","person_id":"P_001","event_type":"VIEWED","resource_type":"TOPIC","resource_id":"TOPIC_004","timestamp":"2024-01-01T11:37:53.309297","query":null}
+{"event_id":"EVENT_0008","person_id":"P_001","event_type":"VIEWED","resource_type":"DOC","resource_id":"DOC_078","timestamp":"2024-01-01T11:43:51.655231","query":null}
+{"event_id":"EVENT_0009","person_id":"P_001","event_type":"VIEWED","resource_type":"TOPIC","resource_id":"TOPIC_036","timestamp":"2024-01-01T11:48:11.350056","query":null}
+{"event_id":"EVENT_0010","person_id":"P_001","event_type":"CLICKED","resource_type":"DOC","resource_id":"DOC_042","timestamp":"2024-01-01T11:54:47.035273","query":null}
+{"event_id":"EVENT_0011","person_id":"P_001","event_type":"SEARCHED","resource_type":"QUERY","resource_id":"SEARCH_QUERY","timestamp":"2024-01-02T09:06:00","query":"user onboarding flow"}
+{"event_id":"EVENT_0012","person_id":"P_001","event_type":"CLICKED","resource_type":"DOC","resource_id":"DOC_138","timestamp":"2024-01-02T09:14:50.462173","query":null}
+{"event_id":"EVENT_0013","person_id":"P_001","event_type":"VIEWED","resource_type":"DOC","resource_id":"DOC_046","timestamp":"2024-01-02T09:17:43.533438","query":null}
+{"event_id":"EVENT_0014","person_id":"P_001","event_type":"SEARCHED","resource_type":"QUERY","resource_id":"SEARCH_QUERY","timestamp":"2024-01-02T09:26:40.470564","query":"user experience research"}
+{"event_id":"EVENT_0015","person_id":"P_001","event_type":"CLICKED","resource_type":"TOPIC","resource_id":"TOPIC_031","timestamp":"2024-01-02T09:33:59.688309","query":null}
+{"event_id":"EVENT_0016","person_id":"P_001","event_type":"SEARCHED","resource_type":"QUERY","resource_id":"SEARCH_QUERY","timestamp":"2024-01-02T09:39:54.243313","query":"product roadmap planning"}
+{"event_id":"EVENT_0017","person_id":"P_001","event_type":"VIEWED","resource_type":"TOPIC","resource_id":"TOPIC_031","timestamp":"2024-01-02T09:46:09.041890","query":null}
+{"event_id":"EVENT_0018","person_id":"P_001","event_type":"SEARCHED","resource_type":"QUERY","resource_id":"SEARCH_QUERY","timestamp":"2024-01-02T09:54:48.687908","query":"customer feedback analysis"}
+{"event_id":"EVENT_0019","person_id":"P_001","event_type":"VIEWED","resource_type":"DOC","resource_id":"DOC_053","timestamp":"2024-01-02T09:56:39.643164","query":null}
+{"event_id":"EVENT_0020","person_id":"P_001","event_type":"SEARCHED","resource_type":"QUERY","resource_id":"SEARCH_QUERY","timestamp":"2024-01-02T10:01:02.899284","query":"A/B testing results"}
+{"event_id":"EVENT_0021","person_id":"P_001","event_type":"VIEWED","resource_type":"TOPIC","resource_id":"TOPIC_031","timestamp":"2024-01-02T10:03:03.044471","query":null}
+{"event_id":"EVENT_0022","person_id":"P_001","event_type":"SEARCHED","resource_type":"QUERY","resource_id":"SEARCH_QUERY","timestamp":"2024-01-02T10:06:48.639785","query":"product roadmap planning"}
+{"event_id":"EVENT_0036","person_id":"P_002","event_type":"VIEWED","resource_type":"THREAD","resource_id":"T_DUP_001","timestamp":"2024-01-02T16:05:00","query":null}
+{"event_id":"EVENT_0037","person_id":"P_002","event_type":"VIEWED","resource_type":"THREAD","resource_id":"T_DUP_001","timestamp":"2024-01-02T16:09:21.476243","query":null}
+{"event_id":"EVENT_0038","person_id":"P_002","event_type":"VIEWED","resource_type":"THREAD","resource_id":"T_159","timestamp":"2024-01-02T16:10:56.269727","query":null}
+{"event_id":"EVENT_0039","person_id":"P_002","event_type":"VIEWED","resource_type":"THREAD","resource_id":"T_149","timestamp":"2024-01-02T16:13:57.281922","query":null}
+{"event_id":"EVENT_0040","person_id":"P_002","event_type":"VIEWED","resource_type":"DOC","resource_id":"DOC_118","timestamp":"2024-01-02T16:18:34.842159","query":null}
+{"event_id":"EVENT_0041","person_id":"P_002","event_type":"VIEWED","resource_type":"THREAD","resource_id":"T_012","timestamp":"2024-01-02T16:19:51.105450","query":null}
+{"event_id":"EVENT_0042","person_id":"P_002","event_type":"VIEWED","resource_type":"DOC","resource_id":"DOC_032","timestamp":"2024-01-02T16:22:12.323390","query":null}
+{"event_id":"EVENT_0023","person_id":"P_001","event_type":"VIEWED","resource_type":"TOPIC","resource_id":"TOPIC_016","timestamp":"2024-01-03T13:39:00","query":null}
+{"event_id":"EVENT_0024","person_id":"P_001","event_type":"VIEWED","resource_type":"TOPIC","resource_id":"TOPIC_016","timestamp":"2024-01-03T13:42:42.773308","query":null}
+{"event_id":"EVENT_0025","person_id":"P_001","event_type":"SEARCHED","resource_type":"QUERY","resource_id":"SEARCH_QUERY","timestamp":"2024-01-03T13:46:24.771622","query":"product metrics dashboard"}
+{"event_id":"EVENT_0026","person_id":"P_001","event_type":"SEARCHED","resource_type":"QUERY","resource_id":"SEARCH_QUERY","timestamp":"2024-01-03T13:52:37.788785","query":"pricing strategy impact"}
+{"event_id":"EVENT_0058","person_id":"P_003","event_type":"VIEWED","resource_type":"PACK","resource_id":"PACK_PRODUCT_001","timestamp":"2024-01-03T15:39:00","query":null}
+{"event_id":"EVENT_0059","person_id":"P_003","event_type":"SEARCHED","resource_type":"QUERY","resource_id":"SEARCH_QUERY","timestamp":"2024-01-03T15:46:29.689137","query":"code review guidelines"}
+{"event_id":"EVENT_0060","person_id":"P_003","event_type":"SEARCHED","resource_type":"QUERY","resource_id":"SEARCH_QUERY","timestamp":"2024-01-03T16:00:42.072591","query":"new hire training materials"}
+{"event_id":"EVENT_0061","person_id":"P_003","event_type":"VIEWED","resource_type":"PACK","resource_id":"PACK_PRODUCT_001","timestamp":"2024-01-03T16:03:29.698009","query":null}
+{"event_id":"EVENT_0062","person_id":"P_003","event_type":"SEARCHED","resource_type":"QUERY","resource_id":"SEARCH_QUERY","timestamp":"2024-01-03T16:16:56.082528","query":"code review guidelines"}
+{"event_id":"EVENT_0063","person_id":"P_003","event_type":"VIEWED","resource_type":"DOC","resource_id":"DOC_144","timestamp":"2024-01-03T16:27:43.289915","query":null}
+{"event_id":"EVENT_0064","person_id":"P_003","event_type":"VIEWED","resource_type":"DOC","resource_id":"DOC_033","timestamp":"2024-01-03T16:33:13.594294","query":null}
+{"event_id":"EVENT_0065","person_id":"P_003","event_type":"VIEWED","resource_type":"PACK","resource_id":"PACK_PRODUCT_001","timestamp":"2024-01-03T16:42:20.122209","query":null}
+{"event_id":"EVENT_0066","person_id":"P_003","event_type":"VIEWED","resource_type":"DOC","resource_id":"DOC_129","timestamp":"2024-01-03T16:54:44.362967","query":null}
+{"event_id":"EVENT_0067","person_id":"P_003","event_type":"VIEWED","resource_type":"DOC","resource_id":"DOC_045","timestamp":"2024-01-03T16:56:10.091310","query":null}
+{"event_id":"EVENT_0068","person_id":"P_003","event_type":"SEARCHED","resource_type":"QUERY","resource_id":"SEARCH_QUERY","timestamp":"2024-01-05T15:29:00","query":"project management process"}
+{"event_id":"EVENT_0069","person_id":"P_003","event_type":"SEARCHED","resource_type":"QUERY","resource_id":"SEARCH_QUERY","timestamp":"2024-01-05T15:33:47.375410","query":"product onboarding guide"}
+{"event_id":"EVENT_0070","person_id":"P_003","event_type":"VIEWED","resource_type":"PACK","resource_id":"PACK_PRODUCT_001","timestamp":"2024-01-05T15:41:32.973123","query":null}
+{"event_id":"EVENT_0071","person_id":"P_003","event_type":"VIEWED","resource_type":"PACK","resource_id":"PACK_PRODUCT_001","timestamp":"2024-01-05T15:43:31.053648","query":null}
+{"event_id":"EVENT_0072","person_id":"P_003","event_type":"SEARCHED","resource_type":"QUERY","resource_id":"SEARCH_QUERY","timestamp":"2024-01-05T15:45:14.664388","query":"product onboarding guide"}
+{"event_id":"EVENT_0073","person_id":"P_003","event_type":"VIEWED","resource_type":"DOC","resource_id":"DOC_047","timestamp":"2024-01-05T15:47:09.531504","query":null}
+{"event_id":"EVENT_0074","person_id":"P_003","event_type":"SEARCHED","resource_type":"QUERY","resource_id":"SEARCH_QUERY","timestamp":"2024-01-05T15:50:45.212512","query":"product requirements template"}
+{"event_id":"EVENT_0075","person_id":"P_003","event_type":"SEARCHED","resource_type":"QUERY","resource_id":"SEARCH_QUERY","timestamp":"2024-01-05T15:58:52.167805","query":"product onboarding guide"}
+{"event_id":"EVENT_0076","person_id":"P_003","event_type":"SEARCHED","resource_type":"QUERY","resource_id":"SEARCH_QUERY","timestamp":"2024-01-05T16:06:22.819658","query":"product onboarding guide"}
+{"event_id":"EVENT_0077","person_id":"P_003","event_type":"CLICKED","resource_type":"DOC","resource_id":"DOC_134","timestamp":"2024-01-05T16:08:39.249263","query":null}
+{"event_id":"EVENT_0078","person_id":"P_003","event_type":"CLICKED","resource_type":"DOC","resource_id":"DOC_065","timestamp":"2024-01-05T16:24:05.871056","query":null}
+{"event_id":"EVENT_0079","person_id":"P_003","event_type":"SEARCHED","resource_type":"QUERY","resource_id":"SEARCH_QUERY","timestamp":"2024-01-06T09:25:00","query":"product onboarding guide"}
+{"event_id":"EVENT_0080","person_id":"P_003","event_type":"VIEWED","resource_type":"PACK","resource_id":"PACK_PRODUCT_001","timestamp":"2024-01-06T09:26:33.288670","query":null}
+{"event_id":"EVENT_0081","person_id":"P_003","event_type":"SEARCHED","resource_type":"QUERY","resource_id":"SEARCH_QUERY","timestamp":"2024-01-06T09:28:22.024681","query":"product feature overview"}
+{"event_id":"EVENT_0082","person_id":"P_003","event_type":"VIEWED","resource_type":"DOC","resource_id":"DOC_038","timestamp":"2024-01-06T09:31:45.578859","query":null}
+{"event_id":"EVENT_0083","person_id":"P_003","event_type":"SEARCHED","resource_type":"QUERY","resource_id":"SEARCH_QUERY","timestamp":"2024-01-06T09:34:04.777350","query":"product onboarding guide"}
+{"event_id":"EVENT_0043","person_id":"P_002","event_type":"CLICKED","resource_type":"DOC","resource_id":"DOC_139","timestamp":"2024-01-09T16:01:00","query":null}
+{"event_id":"EVENT_0044","person_id":"P_002","event_type":"VIEWED","resource_type":"THREAD","resource_id":"T_044","timestamp":"2024-01-09T16:03:34.040129","query":null}
+{"event_id":"EVENT_0045","person_id":"P_002","event_type":"CLICKED","resource_type":"DOC","resource_id":"DOC_022","timestamp":"2024-01-09T16:13:51.234939","query":null}
+{"event_id":"EVENT_0046","person_id":"P_002","event_type":"VIEWED","resource_type":"THREAD","resource_id":"T_DUP_007","timestamp":"2024-01-15T15:26:00","query":null}
+{"event_id":"EVENT_0047","person_id":"P_002","event_type":"SEARCHED","resource_type":"QUERY","resource_id":"SEARCH_QUERY","timestamp":"2024-01-15T15:29:56.528913","query":"marketing campaign performance"}
+{"event_id":"EVENT_0048","person_id":"P_002","event_type":"SEARCHED","resource_type":"QUERY","resource_id":"SEARCH_QUERY","timestamp":"2024-01-15T15:32:51.994392","query":"customer acquisition cost"}
+{"event_id":"EVENT_0049","person_id":"P_002","event_type":"VIEWED","resource_type":"DOC","resource_id":"DOC_019","timestamp":"2024-01-15T15:36:32.283213","query":null}
+{"event_id":"EVENT_0050","person_id":"P_002","event_type":"SEARCHED","resource_type":"QUERY","resource_id":"SEARCH_QUERY","timestamp":"2024-01-15T15:38:19.319624","query":"marketing campaign performance"}
+{"event_id":"EVENT_0051","person_id":"P_002","event_type":"VIEWED","resource_type":"THREAD","resource_id":"T_DUP_002","timestamp":"2024-01-16T12:04:00","query":null}
+{"event_id":"EVENT_0052","person_id":"P_002","event_type":"VIEWED","resource_type":"DOC","resource_id":"DOC_045","timestamp":"2024-01-16T12:05:09.031394","query":null}
+{"event_id":"EVENT_0053","person_id":"P_002","event_type":"VIEWED","resource_type":"THREAD","resource_id":"T_DUP_001","timestamp":"2024-01-16T12:14:07.480148","query":null}
+{"event_id":"EVENT_0054","person_id":"P_002","event_type":"VIEWED","resource_type":"DOC","resource_id":"DOC_022","timestamp":"2024-01-17T10:07:00","query":null}
+{"event_id":"EVENT_0055","person_id":"P_002","event_type":"VIEWED","resource_type":"THREAD","resource_id":"T_DUP_002","timestamp":"2024-01-17T10:17:21.059078","query":null}

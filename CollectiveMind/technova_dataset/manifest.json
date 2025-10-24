@@ -1,0 +1,137 @@
+{
+  "dataset_info": {
+    "name": "TechNova Synthetic Dataset",
+    "version": "1.0.0",
+    "generated_at": "2025-10-24T08:53:21.367882",
+    "company": "TechNova Inc"
+  },
+  "files": [
+    {
+      "name": "people.jsonl",
+      "records": 25,
+      "format": "jsonl",
+      "description": "Employee profiles and organizational structure"
+    },
+    {
+      "name": "documents.jsonl",
+      "records": 160,
+      "format": "jsonl",
+      "description": "Organizational documents across all teams"
+    },
+    {
+      "name": "chat_threads.jsonl",
+      "records": 290,
+      "format": "jsonl",
+      "description": "Chat threads and conversation channels"
+    },
+    {
+      "name": "chat_messages.jsonl",
+      "records": 2934,
+      "format": "jsonl",
+      "description": "Individual chat messages with emotional context"
+    },
+    {
+      "name": "topics.jsonl",
+      "records": 66,
+      "format": "jsonl",
+      "description": "Topics and themes across the organization"
+    },
+    {
+      "name": "knowledge_graph_edges.jsonl",
+      "records": 2500,
+      "format": "jsonl",
+      "description": "Knowledge graph relationships between entities"
+    },
+    {
+      "name": "overlaps.jsonl",
+      "records": 10,
+      "format": "jsonl",
+      "description": "Cross-team collaboration opportunities and overlaps"
+    },
+    {
+      "name": "meetings.jsonl",
+      "records": 30,
+      "format": "jsonl",
+      "description": "Meeting summaries with decisions and action items"
+    },
+    {
+      "name": "weekly_briefs.jsonl",
+      "records": 17,
+      "format": "jsonl",
+      "description": "Weekly organizational and team briefs"
+    },
+    {
+      "name": "starter_packs.jsonl",
+      "records": 5,
+      "format": "jsonl",
+      "description": "Onboarding starter packs for each team"
+    },
+    {
+      "name": "acls.jsonl",
+      "records": 371,
+      "format": "jsonl",
+      "description": "Access control lists and permissions"
+    },
+    {
+      "name": "user_events.jsonl",
+      "records": 78,
+      "format": "jsonl",
+      "description": "User interaction events for personalization"
+    },
+    {
+      "name": "marketing_metrics.csv",
+      "format": "csv",
+      "description": "Business metrics data for marketing"
+    },
+    {
+      "name": "product_adoption.csv",
+      "format": "csv",
+      "description": "Business metrics data for product"
+    },
+    {
+      "name": "customer_churn.csv",
+      "format": "csv",
+      "description": "Business metrics data for customer"
+    },
+    {
+      "name": "finance_kpis.csv",
+      "format": "csv",
+      "description": "Business metrics data for finance"
+    },
+    {
+      "name": "hr_analytics.csv",
+      "format": "csv",
+      "description": "Business metrics data for hr"
+    }
+  ],
+  "statistics": {
+    "teams": 5,
+    "people_count": 25,
+    "documents_count": 160,
+    "chat_threads_count": 290,
+    "chat_messages_count": 2934,
+    "managers_count": 11,
+    "duplicate_discussions": 50,
+    "emotional_threads": 20,
+    "csv_files_count": 5,
+    "topics_count": 66,
+    "knowledge_graph_edges_count": 2500,
+    "cross_team_overlaps_count": 10,
+    "meetings_count": 30,
+    "weekly_briefs_count": 17,
+    "starter_packs_count": 5,
+    "acls_count": 371,
+    "user_events_count": 78
+  },
+  "data_ranges": {
+    "start_date": "2024-01-01",
+    "end_date": "2025-10-24"
+  },
+  "teams": [
+    "Marketing",
+    "Product",
+    "Engineering",
+    "Finance",
+    "HR"
+  ]
+}
