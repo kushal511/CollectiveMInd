@@ -92,14 +92,63 @@ export default function SearchPage() {
   const [showFilters, setShowFilters] = useState(false);
 
   useEffect(() => {
-    if (query) {
-      setLoading(true);
-      // Simulate API call
-      setTimeout(() => {
-        setResults(mockResults);
-        setLoading(false);
-      }, 800);
-    }
+    const performSearch = async () => {
+      if (query) {
+        setLoading(true);
+        try {
+          // Make API call to backend search endpoint
+          const response = await fetch('http://localhost:8000/api/search/hybrid', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              query: query.trim(),
+              userContext: {
+                userId: 'demo-user',
+                team: 'Engineering',
+                role: 'Developer'
+              },
+              pagination: {
+                page: 1,
+                size: 20
+              }
+            }),
+          });
+
+          if (response.ok) {
+            const data = await response.json();
+            // Transform API response to match our interface
+            const transformedResults: SearchResult[] = data.results?.map((item: any, index: number) => ({
+              id: item.id || `result-${index}`,
+              type: item.type || 'document',
+              title: item.title || item.metadata?.title || 'Untitled',
+              content: item.content || item.text || '',
+              author: item.metadata?.author || 'Unknown',
+              team: item.metadata?.team || 'Unknown',
+              date: item.metadata?.date || new Date().toISOString().split('T')[0],
+              tags: item.metadata?.tags || [],
+              relevanceScore: item.score || 0,
+              isFavorited: false
+            })) || [];
+            
+            setResults(transformedResults);
+          } else {
+            console.error('Search API error:', response.statusText);
+            // Fallback to mock results
+            setResults(mockResults);
+          }
+        } catch (error) {
+          console.error('Search request failed:', error);
+          // Fallback to mock results
+          setResults(mockResults);
+        } finally {
+          setLoading(false);
+        }
+      }
+    };
+
+    performSearch();
   }, [query]);
 
   // Handle URL parameter changes
@@ -110,14 +159,60 @@ export default function SearchPage() {
     }
   }, [searchParams]);
 
-  const handleSearch = (e: React.FormEvent) => {
+  const handleSearch = async (e: React.FormEvent) => {
     e.preventDefault();
     if (query.trim()) {
       setLoading(true);
-      setTimeout(() => {
+      try {
+        // Make API call to backend search endpoint
+        const response = await fetch('http://localhost:8000/api/search/hybrid', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            query: query.trim(),
+            userContext: {
+              userId: 'demo-user',
+              team: 'Engineering',
+              role: 'Developer'
+            },
+            pagination: {
+              page: 1,
+              size: 20
+            }
+          }),
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          // Transform API response to match our interface
+          const transformedResults: SearchResult[] = data.results?.map((item: any, index: number) => ({
+            id: item.id || `result-${index}`,
+            type: item.type || 'document',
+            title: item.title || item.metadata?.title || 'Untitled',
+            content: item.content || item.text || '',
+            author: item.metadata?.author || 'Unknown',
+            team: item.metadata?.team || 'Unknown',
+            date: item.metadata?.date || new Date().toISOString().split('T')[0],
+            tags: item.metadata?.tags || [],
+            relevanceScore: item.score || 0,
+            isFavorited: false
+          })) || [];
+          
+          setResults(transformedResults);
+        } else {
+          console.error('Search API error:', response.statusText);
+          // Fallback to mock results
+          setResults(mockResults);
+        }
+      } catch (error) {
+        console.error('Search request failed:', error);
+        // Fallback to mock results
         setResults(mockResults);
+      } finally {
         setLoading(false);
-      }, 800);
+      }
     }
   };
 
